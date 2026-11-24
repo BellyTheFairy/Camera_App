@@ -1,0 +1,293 @@
+/* app/static/css/style.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Нежно-розовый градиент */
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Общие стили для фоновых картинок */
+.bg-img {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.2; /* Делаем их полупрозрачными, чтобы не мешали тексту */
+    filter: grayscale(20%) sepia(20%) hue-rotate(300deg); /* Легкий розовый оттенок на самих фото */
+}
+
+/* Расставляем ваши конкретные файлы */
+.img-camera-png {
+    top: 5%;
+    left: 5%;
+    width: 180px;
+    transform: rotate(-10deg);
+}
+
+.img-camera1-jpg {
+    bottom: 10%;
+    right: 5%;
+    width: 220px;
+    transform: rotate(15deg);
+}
+
+.img-photo1-jpg {
+    top: 40%;
+    right: 25%;
+    width: 150px;
+    opacity: 0.15;
+    transform: rotate(5deg);
+}
+
+/* Стили самой карточки входа (стекло) */
+.login-container {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 25px;
+    padding: 50px 40px;
+    width: 400px;
+    box-shadow: 0 20px 40px rgba(255, 105, 180, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: center;
+    color: #880e4f;
+    z-index: 10;
+}
+
+.login-container h2 {
+    margin-bottom: 35px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #c2185b;
+    text-transform: uppercase;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #ad1457;
+    border: none;
+    border-bottom: 2px solid #f8bbd0;
+    outline: none;
+    background: transparent;
+    transition: 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #ec407a;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+    top: -20px;
+    font-size: 12px;
+    color: #880e4f;
+    font-weight: bold;
+}
+
+.input-group input:focus {
+    border-bottom: 2px solid #c2185b;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background: #ff4081;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+}
+
+.btn-login:hover {
+    background: #f50057;
+    transform: scale(1.02);
+}
+
+.toggle-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.toggle-link a {
+    color: #c2185b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* === Стили видоискателя камеры === */
+.camera-hud {
+    position: fixed;
+    inset: 0;
+    pointer-events: none; /* Чтобы видоискатель не мешал нажимать на кнопки и поля */
+    z-index: 100;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgba(255, 255, 255, 0.75);
+    user-select: none;
+}
+
+/* Уголки по краям экрана */
+.hud-corner {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-color: rgba(255, 255, 255, 0.5);
+    border-style: solid;
+}
+.top-left { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
+.top-right { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
+.bottom-left { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
+.bottom-right { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
+
+/* Верхняя и нижняя строки параметров */
+.hud-top, .hud-bottom {
+    position: absolute;
+    left: 70px;
+    right: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+}
+.hud-top { top: 26px; }
+.hud-bottom { bottom: 26px; }
+
+/* Мигающая красная точка REC */
+.rec-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: #fff;
+}
+.rec-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ff3b30;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ff3b30;
+    animation: blinkRec 1.2s infinite;
+}
+
+@keyframes blinkRec {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.15; }
+}
+
+/* Рамка автофокуса по центру */
+.focus-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 440px;
+    height: 460px;
+    transform: translate(-50%, -50%);
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    transition: all 0.25s ease;
+}
+
+/* Состояние пойманного фокуса (когда пользователь печатает) */
+.focus-frame.focused {
+    width: 410px;
+    height: 430px;
+    border: 2px solid #34c759;
+    box-shadow: 0 0 20px rgba(52, 199, 89, 0.35), inset 0 0 15px rgba(52, 199, 89, 0.15);
+}
+
+/* Чтобы сама форма была кликабельна поверх рамки */
+.login-container {
+    position: relative;
+    z-index: 200;
+}
+
+/* === Дополнительные стили для register.html === */
+.subtitle {
+    text-align: center;
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: -10px;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+/* Увеличиваем высоту рамки автофокуса для 4 полей */
+.focus-frame.register-frame {
+    height: 550px;
+}
+.focus-frame.register-frame.focused {
+    height: 525px;
+}
+
+/* Оранжевый цвет рамки, если пароли не совпадают (расфокус) */
+.focus-frame.out-of-focus {
+    width: 455px;
+    height: 565px;
+    border: 2px dashed #ff9500;
+    box-shadow: 0 0 20px rgba(255, 149, 0, 0.35);
+}
+
+/* Зелёный индикатор нового профиля вместо красного REC */
+.new-film-dot {
+    background-color: #34c759;
+    box-shadow: 0 0 8px #34c759;
+}
+
+/* Кнопка "глазик" внутри поля пароля */
+.password-group {
+    position: relative;
+}
+.toggle-pass-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+.toggle-pass-btn:hover {
+    opacity: 1;
+}
+
+/* Всплывающее уведомление камеры */
+.cam-toast {
+    min-height: 20px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #ff9500;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+.cam-toast.visible {
+    opacity: 1;
+}

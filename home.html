@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Конструктор сборки | Photo Kit 2026</title>
+    <style>
+        /* === ЦВЕТОВАЯ ПАЛИТРА И ПЕРЕМЕННЫЕ === */
+        :root {
+            --bg-deep: #1a0b14;
+            --bg-gradient-start: #3d1e33;
+            --bg-gradient-end: #1a0b14;
+            --card-bg: rgba(45, 20, 35, 0.85);
+            --pink-primary: #ec4899;
+            --pink-light: #f9a8d4;
+            --pink-glow: rgba(236, 72, 153, 0.35);
+            --rose-gold: #fda4af;
+            --text-main: #fdf2f8;
+            --text-muted: #fbcfe8;
+            --border-soft: rgba(244, 114, 182, 0.25);
+            --border-active: #ec4899;
+        }
+
+        * { box-sizing: border-box; }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top center, var(--bg-gradient-start) 0%, var(--bg-deep) 100%);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Кастомный скроллбар */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep); }
+        ::-webkit-scrollbar-thumb { background: var(--pink-primary); border-radius: 4px; }
+
+        /* === ВИДОИСКАТЕЛЬ КАМЕРЫ (HUD) === */
+        .camera-hud {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 100;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--pink-light);
+            user-select: none;
+        }
+        .hud-corner {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-color: var(--pink-primary);
+            border-style: solid;
+            box-shadow: 0 0 8px var(--pink-glow);
+        }
+        .top-left { top: 18px; left: 18px; border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+        .top-right { top: 18px; right: 18px; border-width: 2px 2px 0 0; border-radius: 0 4px 0 0; }
+        .bottom-left { bottom: 18px; left: 18px; border-width: 0 0 2px 2px; border-radius: 0 0 0 4px; }
+        .bottom-right { bottom: 18px; right: 18px; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
+
+        .hud-top, .hud-bottom {
+            position: absolute;
+            left: 65px;
+            right: 65px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+        }
+        .hud-top { top: 22px; }
+        .hud-bottom { bottom: 22px; }
+
+        .rec-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+        .rec-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--pink-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--pink-primary);
+            animation: blinkRec 1.5s infinite;
+        }
+        @keyframes blinkRec {
+            0%, 49% { opacity: 1; transform: scale(1); }
+            50%, 100% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        .hud-logout {
+            color: var(--pink-light);
+            text-decoration: none;
+            pointer-events: auto;
+            font-weight: bold;
+            border: 1px solid var(--border-soft);
+            background: rgba(45, 20, 35, 0.75);
+            padding: 4px 12px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        .hud-logout:hover {
+            background: var(--pink-primary);
+            color: white;
+            box-shadow: 0 0 15px var(--pink-glow);
+        }
+
+        /* === ОСНОВНОЙ КОНТЕЙНЕР === */
+        .builder-wrapper {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 75px 40px 85px;
+            position: relative;
+            z-index: 150;
+        }
+
+        .builder-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+        .badge-top {
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--pink-primary);
+            background: rgba(236, 72, 153, 0.12);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.1);
+        }
+        .builder-header h1 {
+            font-size: 36px;
+            margin: 0 0 12px;
+            background: linear-gradient(90deg, #fdf2f8, #f9a8d4, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        .builder-header p {
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 24px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .presets-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+        .preset-btn {
+            background: rgba(45, 20, 35, 0.9);
+            color: var(--text-main);
+            border: 1px solid var(--border-soft);
+            padding: 10px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .preset-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--pink-primary);
+            box-shadow: 0 4px 15px var(--pink-glow);
+        }
+        .preset-btn.active {
+            background: rgba(236, 72, 153, 0.2);
+            border-color: var(--pink-primary);
+            color: #fff;
+            box-shadow: 0 0 15px var(--pink-glow);
+        }
+        .preset-btn.reset:hover {
+            border-color: #f43f5e;
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.2);
+        }
+
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+        @media (max-width: 920px) {
+            .builder-grid { grid-template-columns: 1fr; }
+            .hud-top, .hud-bottom { left: 25px; right: 25px; font-size: 11px; }
+        }
+
+        .category-card, .summary-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-soft);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.3s;
+        }
+        .category-card:hover {
+            border-color: rgba(244, 114, 182, 0.4);
+        }
+
+        .card-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .card-title-row h3 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--pink-light);
+            font-weight: 600;
+        }
+        .tag-pill {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: rgba(244, 114, 182, 0.1);
+            color: var(--pink-light);
+            border: 1px solid rgba(244, 114, 182, 0.2);
+        }
+
+        .kit-select {
+            width: 100%;
+            padding: 14px;
+            background: rgba(26, 11, 20, 0.8);
+            color: var(--text-main);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .kit-select:focus {
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15);
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 550px) {
+            .checkbox-grid { grid-template-columns: 1fr; }
+        }
+
+        .kit-tile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: rgba(26, 11, 20, 0.6);
+            border: 1px solid var(--border-soft);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+        .kit-tile:hover {
+            border-color: var(--pink-light);
+            background: rgba(45, 20, 35, 0.9);
+        }
+        .kit-tile:has(input:checked) {
+            border-color: var(--pink-primary);
+            background: rgba(236, 72, 153, 0.12);
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.1);
+        }
+        .kit-tile input[type="checkbox"] {
+            accent-color: var(--pink-primary);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .tile-content {
+            display: flex;
+            flex-direction: column;
+        }
+        .tile-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .tile-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        /* === ПРАВАЯ КОЛОНКА: ИНТЕРАКТИВНЫЙ СТЕНД === */
+        .summary-card {
+            position: sticky;
+            top: 70px;
+        }
+        .rig-stage {
+            background: rgba(26, 11, 20, 0.9);
+            border: 1px dashed var(--border-soft);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            min-height: 185px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .stage-label {
+            position: absolute;
+            top: 10px;
+            left: 14px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            color: var(--pink-primary);
+            letter-spacing: 1.5px;
+            opacity: 0.7;
+        }
+
+        .rig-blueprint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .bp-top-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bp-middle-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bp-part {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            opacity: 0;
+            transform: scale(0.7);
+            pointer-events: none;
+        }
+        .bp-part.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .bp-body {
+            width: 86px;
+            height: 60px;
+            background: rgba(45, 20, 35, 0.8);
+            border: 2px solid var(--rose-gold);
+            color: var(--rose-gold);
+            position: relative;
+            opacity: 0.35;
+            transform: scale(1);
+        }
+        .bp-body.active {
+            opacity: 1;
+            border-color: var(--pink-primary);
+            color: #fff;
+            box-shadow: 0 0 20px var(--pink-glow);
+        }
+        .bp-cage {
+            position: absolute;
+            inset: -6px;
+            border: 2px dashed var(--pink-light);
+            border-radius: 10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .bp-cage.active {
+            opacity: 1;
+        }
+        .bp-lens {
+            height: 44px;
+            width: 0;
+            background: rgba(45, 20, 35, 0.8);
+            border: 2px solid var(--pink-light);
+            color: var(--pink-light);
+            overflow: hidden;
+        }
+        .bp-lens.active.size-small { width: 40px; }
+        .bp-lens.active.size-medium { width: 64px; }
+        .bp-lens.active.size-large { width: 92px; }
+        
+        .bp-mattebox {
+            width: 0;
+            height: 54px;
+            background: rgba(88, 28, 68, 0.6);
+            border: 2px solid #f0abfc;
+            color: #f0abfc;
+            writing-mode: vertical-rl;
+            font-size: 8px;
+            overflow: hidden;
+        }
+        .bp-mattebox.active { width: 22px; }
+        
+        .bp-top-handle {
+            padding: 4px 14px;
+            background: rgba(45, 20, 35, 0.8);
+            border: 1px solid var(--rose-gold);
+            color: var(--rose-gold);
+        }
+        .bp-side-handle {
+            width: 0;
+            height: 48px;
+            background: rgba(88, 28, 68, 0.6);
+            border: 1px solid #f9a8d4;
+            color: #f9a8d4;
+            writing-mode: vertical-rl;
+            overflow: hidden;
+        }
+        .bp-side-handle.active { width: 20px; }
+        
+        .bp-vmount {
+            width: 0;
+            height: 52px;
+            background: rgba(88, 28, 68, 0.6);
+            border: 1px solid #f472b6;
+            color: #f472b6;
+            writing-mode: vertical-rl;
+            font-size: 8px;
+            overflow: hidden;
+        }
+        .bp-vmount.active { width: 24px; }
+        
+        .bp-monitor, .bp-light {
+            padding: 4px 12px;
+            background: rgba(88, 28, 68, 0.6);
+            border: 1px solid #f0abfc;
+            color: #f0abfc;
+        }
+
+        .metrics-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .metric {
+            background: rgba(26, 11, 20, 0.8);
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border-soft);
+        }
+        .metric-label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .metric-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .metric-value.price {
+            color: var(--pink-primary);
+            text-shadow: 0 0 10px var(--pink-glow);
+        }
+
+        .load-meter {
+            margin-bottom: 20px;
+        }
+        .load-meter-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+        .load-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: rgba(26, 11, 20, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+        }
+        .load-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #f472b6, #ec4899);
+            border-radius: 10px;
+            transition: width 0.4s ease, background-color 0.4s ease;
+            box-shadow: 0 0 10px var(--pink-glow);
+        }
+
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+        .guide-header h3 {
+            margin: 0;
+            font-size: 15px;
+            color: var(--pink-light);
+        }
+        .guide-hint {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        .steps-checklist {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .empty-step {
+            font-size: 13px;
+            color: var(--text-muted);
+            padding: 12px;
+            background: rgba(26, 11, 20, 0.6);
+            border-radius: 12px;
+            text-align: center;
+            border: 1px dashed var(--border-soft);
+        }
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(26, 11, 20, 0.6);
+            border: 1px solid var(--border-soft);
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .step-item:hover {
+            border-color: var(--pink-primary);
+            background: rgba(45, 20, 35, 0.8);
+        }
+        .step-check {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+            border: 2px solid var(--border-soft);
+            border-radius: 6px;
+            margin-top: 2px;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .step-item.done {
+            opacity: 0.6;
+            text-decoration: line-through;
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+        .step-item.done .step-check {
+            background: var(--pink-primary);
+            border-color: var(--pink-primary);
+        }
+        .step-item.done .step-check::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .btn-copy-kit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+        .btn-copy-kit:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+        }
+        .btn-copy-kit.copied {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HUD КАМЕРЫ -->
+    <div class="camera-hud">
+        <div class="hud-corner top-left"></div>
+        <div class="hud-corner top-right"></div>
+        <div class="hud-corner bottom-left"></div>
+        <div class="hud-corner bottom-right"></div>
+        <div class="hud-top">
+            <span>🌸 RIG STUDIO 2026</span>
+            <span id="hudLoadStatus">[ ОЖИДАНИЕ СБОРКИ ]</span>
+        </div>
+        <div class="hud-bottom">
+            <div class="rec-indicator">
+                <div class="rec-dot"></div>
+                <span>MASS: <span id="hudWeight">0 г</span></span>
+            </div>
+            <span>BUDGET: <span id="hudPrice">0 $</span></span>
+            <a href="#" class="hud-logout">ВЫЙТИ ⎋</a>
+        </div>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="builder-wrapper">
+        <div class="builder-header">
+            <div class="badge-top">✨ PHOTO KIT • ИНТЕРАКТИВНЫЙ ГАЙД</div>
+            <h1>Собери свой идеальный сетап</h1>
+            <p>Выбирайте компоненты, наблюдайте, как меняется схема рига, контролируйте развесовку и следуйте пошаговой инструкции сборки.</p>
+            <div class="presets-bar">
+                <button class="preset-btn" onclick="applyPreset('street', this)">🚶‍♀️ Стрит-минимализм</button>
+                <button class="preset-btn" onclick="applyPreset('event', this)">📸 Репортаж / Свадьба</button>
+                <button class="preset-btn" onclick="applyPreset('cinema', this)">🎬 Кино-риг (Full Cage)</button>
+                <button class="preset-btn reset" onclick="applyPreset('clear', this)">↺ Сбросить</button>
+            </div>
+        </div>
+
+        <div class="builder-grid">
+            <!-- ЛЕВАЯ КОЛОНКА: КОМПОНЕНТЫ -->
+            <div class="components-column">
+                <div class="category-card">
+                    <div class="card-title-row">
+                        <h3>01. Тушка камеры (Body)</h3>
+                        <span class="tag-pill">База</span>
+                    </div>
+                    <select id="selectBody" class="kit-select" onchange="recalculateKit()">
+                        <option value="0|0|не выбрана">Выберите камеру...</option>
+                        <option value="650|1900|Sony A7 IV">Sony A7 IV — 650 г • ~1 900 $</option>
+                        <option value="715|3400|Sony A7S III">Sony A7S III — 715 г • ~3 400 $</option>
+                        <option value="650|2200|Canon EOS R6 Mark II">Canon EOS R6 Mark II — 650 г • ~2 200 $</option>
+                        <option value="550|1350|Fujifilm X-S20">Fujifilm X-S20 — 550 г • ~1 350 $</option>
+                        <option value="910|3800|Nikon Z8">Nikon Z8 — 910 г • ~3 800 $</option>
+                    </select>
+                </div>
+
+                <div class="category-card">
+                    <div class="card-title-row">
+                        <h3>02. Объектив (Optics)</h3>
+                        <span class="tag-pill">Оптика</span>
+                    </div>
+                    <select id="selectLens" class="kit-select" onchange="recalculateKit()">
+                        <option value="0|0|не выбран" data-size="small">Выберите объектив...</option>
+                        <option value="180|250|Фикс 35mm f/1.8" data-size="small">Фикс 35mm f/1.8 — 180 г • ~250 $</option>
+                        <option value="280|450|Фикс 50mm f/1.8" data-size="small">Фикс 50mm f/1.8 — 280 г • ~450 $</option>
+                        <option value="695|2100|Зум 24-70mm f/2.8" data-size="medium">Зум 24-70mm f/2.8 — 695 г • ~2 100 $</option>
+                        <option value="1045|2400|Телевик 70-200mm f/2.8" data-size="large">Телевик 70-200mm f/2.8 — 1 045 г • ~2 400 $</option>
+                        <option value="520|950|Кино-фикс 24mm T1.5" data-size="medium">Кино-фикс 24mm T1.5 — 520 г • ~950 $</option>
+                    </select>
+                </div>
+
+                <div class="category-card">
+                    <div class="card-title-row">
+                        <h3>03. Обвес и защита (Rig / Cage)</h3>
+                        <span class="tag-pill">Механика</span>
+                    </div>
+                    <div class="checkbox-grid">
+                        <label class="kit-tile">
+                            <input type="checkbox" class="rig-item" data-name="Клетка (Cage)" data-weight="120" data-price="80" data-part="cage" onchange="recalculateKit()">
+                            <div class="tile-content">
+                                <span class="tile-name">Клетка (Cage)</span>
+                                <span class="tile-meta">120 г • ~80 $</span>
+                            </div>
+                        </label>
+                        <label class="kit-tile">
+                            <input type="checkbox" class="rig-item" data-name="Верхняя ручка" data-weight="90" data-price="60" data-part="top-handle" onchange="recalculateKit()">
+                            <div class="tile-content">
+                                <span class="tile-name">Верхняя ручка</span>
+                                <span class="tile-meta">90 г • ~60 $</span>
+                            </div>
+                        </label>
+                        <label class="kit-tile">
+                            <input type="checkbox" class="rig-item" data-name="Боковая рукоятка" data-weight="110" data-price="50" data-part="side-handle" onchange="recalculateKit()">
+                            <div class="tile-content">
+                                <span class="tile-name">Боковая рукоятка</span>
+                                <span class="tile-meta">110 г • ~50 $</span>
+                            </div>
+                        </label>
+                        <label class="kit-tile">
+                            <input type="checkbox" class="rig-item" data-name="Компендиум (Matte Box)" data-weight="350" data-price="150" data-part="mattebox" onchange="recalculateKit()">
+                            <div class="tile-content">
+                                <span class="tile-name">Компендиум</span>
+                                <span class="tile-meta">350 г • ~150 $</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="category-card">
+                    <div class="card-title-row">
+                        <h3>04. Свет, экран и питание</h3>
+                        <span class="tag-pill">Электроника</span>
+                    </div>
+                    <div class="checkbox-grid">
+                        <label class="kit-tile">
+                            <input type="checkbox" class="rig-item" data-name="Мини RGB LED-свет" data-weight="150" data-price="40" data-part="led" onchange="recalculateKit()">
+                            <div class="tile-content">
+                                <span class="tile-name">Мини RGB LED-свет</span>
+                                <span class="tile-meta">150 г • ~40 $</span>
+                            </div>
+                        </label>
+                        <label class="kit-tile">
+                            <input type="checkbox" class="rig-item" data-name="Вспышка TTL" data-weight="400" data-price="300" data-part="flash" onchange="recalculateKit()">
+                            <div class="tile-content">
+                                <span class="tile-name">Вспышка TTL</span>
+                                <span class="tile-meta">400 г • ~300 $</span>
+                            </div>
+                        </label>
+                        <label class="kit-tile">
+                            <input type="checkbox" class="rig-item" data-name="Монитор 5&quot;" data-weight="200" data-price="250" data-part="monitor" onchange="recalculateKit()">
+                            <div class="tile-content">
+                                <span class="tile-name">Монитор 5"</span>
+                                <span class="tile-meta">200 г • ~250 $</span>
+                            </div>
+                        </label>
+                        <label class="kit-tile">
+                            <input type="checkbox" class="rig-item" data-name="V-Mount батарея" data-weight="500" data-price="120" data-part="vmount" onchange="recalculateKit()">
+                            <div class="tile-content">
+                                <span class="tile-name">V-Mount батарея</span>
+                                <span class="tile-meta">500 г • ~120 $</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ПРАВАЯ КОЛОНКА: СВОДКА И BLUEPRINT -->
+            <div class="summary-column">
+                <div class="summary-card">
+                    <div class="card-title-row">
+                        <h3>🎀 LIVE BLUEPRINT • СХЕМА СБОРКИ</h3>
+                    </div>
+                    <div class="rig-stage">
+                        <span class="stage-label">RIG STUDIO 2026</span>
+                        <div class="rig-blueprint">
+                            <div class="bp-top-row">
+                                <div id="bp-top-handle" class="bp-part bp-top-handle">TOP HANDLE</div>
+                            </div>
+                            <div class="bp-middle-row">
+                                <div id="bp-monitor" class="bp-part bp-monitor">5" MON</div>
+                                <div id="bp-light" class="bp-part bp-light">LED/FLASH</div>
+                                <div style="position: relative; display: flex; align-items: center;">
+                                    <div id="bp-vmount" class="bp-part bp-vmount">V-MOUNT</div>
+                                    <div id="bp-cage" class="bp-cage"></div>
+                                    <div id="bp-body" class="bp-part bp-body">CAMERA</div>
+                                    <div id="bp-side-handle" class="bp-part bp-side-handle">GRIP</div>
+                                </div>
+                                <div id="bp-mattebox" class="bp-part bp-mattebox">MATTE BOX</div>
+                                <div id="bp-lens" class="bp-part bp-lens">LENS</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metrics-box">
+                        <div class="metric">
+                            <span class="metric-label">Общая масса</span>
+                            <span id="totalWeight" class="metric-value">0 г</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Примерный бюджет</span>
+                            <span id="totalPrice" class="metric-value price">0 $</span>
+                        </div>
+                    </div>
+
+                    <div class="load-meter">
+                        <div class="load-meter-header">
+                            <span>Нагрузка при съёмке с рук</span>
+                            <span id="weightAdvice">Не выбрано</span>
+                        </div>
+                        <div class="load-bar-bg">
+                            <div id="loadBarFill" class="load-bar-fill"></div>
+                        </div>
+                    </div>
+
+                    <div class="guide-header">
+                        <h3>📋 Интерактивная инструкция</h3>
+                        <span class="guide-hint">нажимайте на шаги при сборке</span>
+                    </div>
+                    <ul id="assemblySteps" class="steps-checklist">
+                        <li class="empty-step">Выберите камеру и объектив слева, чтобы построить схему и получить инструкцию ✨</li>
+                    </ul>
+
+                    <button id="copyKitBtn" class="btn-copy-kit" onclick="copyKitSpec()">📋 Скопировать спецификацию кита</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSummaryText = '';
+
+        function recalculateKit() {
+            const bodySelect = document.getElementById('selectBody');
+            const lensSelect = document.getElementById('selectLens');
+            
+            const bodyVal = bodySelect.value.split('|');
+            const bodyWeight = parseInt(bodyVal[0], 10);
+            const bodyPrice = parseInt(bodyVal[1], 10);
+            const bodyName = bodyVal[2];
+            
+            const lensVal = lensSelect.value.split('|');
+            const lensWeight = parseInt(lensVal[0], 10);
+            const lensPrice = parseInt(lensVal[1], 10);
+            const lensName = lensVal[2];
+            const lensSize = lensSelect.options[lensSelect.selectedIndex].dataset.size || 'small';
+            
+            let totalWeight = bodyWeight + lensWeight;
+            let totalPrice = bodyPrice + lensPrice;
+            
+            const selectedExtras = [];
+            const activeParts = new Set();
+            
+            document.querySelectorAll('.rig-item:checked').forEach(item => {
+                totalWeight += parseInt(item.dataset.weight, 10);
+                totalPrice += parseInt(item.dataset.price, 10);
+                selectedExtras.push(item.dataset.name);
+                activeParts.add(item.dataset.part);
+            });
+            
+            updateBlueprint(bodyWeight > 0, lensWeight > 0, lensSize, activeParts);
+            
+            const weightFormatted = totalWeight >= 1000 
+                ? `${(totalWeight / 1000).toFixed(2)} кг (${totalWeight} г)` 
+                : `${totalWeight} г`;
+                
+            document.getElementById('totalWeight').textContent = weightFormatted;
+            document.getElementById('totalPrice').textContent = `${totalPrice.toLocaleString('ru-RU')} $`;
+            document.getElementById('hudWeight').textContent = weightFormatted;
+            document.getElementById('hudPrice').textContent = `${totalPrice.toLocaleString('ru-RU')} $`;
+            
+            const adviceEl = document.getElementById('weightAdvice');
+            const hudStatusEl = document.getElementById('hudLoadStatus');
+            const loadBar = document.getElementById('loadBarFill');
+            const percent = Math.min(100, Math.round((totalWeight / 3500) * 100));
+            
+            loadBar.style.width = `${percent}%`;
+            
+            if (totalWeight === 0) {
+                adviceEl.textContent = 'Не выбрано';
+                adviceEl.style.color = 'var(--text-muted)';
+                loadBar.style.background = 'linear-gradient(90deg, #f472b6, #ec4899)';
+                hudStatusEl.textContent = '[ ОЖИДАНИЕ СБОРКИ ]';
+                hudStatusEl.style.color = '';
+            } else if (totalWeight <= 1300) {
+                adviceEl.textContent = 'Лёгкий (одной рукой) 🌸';
+                adviceEl.style.color = '#f472b6';
+                loadBar.style.background = 'linear-gradient(90deg, #f472b6, #ec4899)';
+                hudStatusEl.textContent = '[ НАГРУЗКА: ЛЁГКАЯ ]';
+                hudStatusEl.style.color = '#f472b6';
+            } else if (totalWeight <= 2400) {
+                adviceEl.textContent = 'Средний (нужен ремень) 🎀';
+                adviceEl.style.color = '#fbbf24';
+                loadBar.style.background = 'linear-gradient(90deg, #fbbf24, #f59e0b)';
+                hudStatusEl.textContent = '[ НАГРУЗКА: СРЕДНЯЯ ]';
+                hudStatusEl.style.color = '#fbbf24';
+            } else {
+                adviceEl.textContent = 'Тяжёлый (риг / штатив) ⚠️';
+                adviceEl.style.color = '#f43f5e';
+                loadBar.style.background = 'linear-gradient(90deg, #f43f5e, #e11d48)';
+                hudStatusEl.textContent = '[ ВНИМАНИЕ: ТЯЖЁЛЫЙ РИГ ]';
+                hudStatusEl.style.color = '#f43f5e';
+            }
+            
+            currentSummaryText = `📷 Сборка Photo Kit 2026:\n` +
+                `• Камера: ${bodyWeight > 0 ? bodyName : 'не выбрана'}\n` +
+                `• Объектив: ${lensWeight > 0 ? lensName : 'не выбран'}\n` +
+                (selectedExtras.length ? `• Обвес и свет: ${selectedExtras.join(', ')}\n` : '') +
+                `⚖️ Итоговая масса: ${weightFormatted}\n` +
+                `💰 Примерный бюджет: ${totalPrice.toLocaleString('ru-RU')} $`;
+                
+            generateGuide(bodyWeight > 0 ? bodyName : null, lensWeight > 0 ? lensName : null, selectedExtras);
+        }
+
+        function updateBlueprint(hasBody, hasLens, lensSize, parts) {
+            document.getElementById('bp-body').classList.toggle('active', hasBody);
+            
+            const lensEl = document.getElementById('bp-lens');
+            lensEl.classList.toggle('active', hasLens);
+            lensEl.classList.remove('size-small', 'size-medium', 'size-large');
+            if (hasLens) lensEl.classList.add(`size-${lensSize}`);
+            
+            document.getElementById('bp-cage').classList.toggle('active', parts.has('cage'));
+            document.getElementById('bp-top-handle').classList.toggle('active', parts.has('top-handle'));
+            document.getElementById('bp-side-handle').classList.toggle('active', parts.has('side-handle'));
+            document.getElementById('bp-mattebox').classList.toggle('active', parts.has('mattebox'));
+            document.getElementById('bp-monitor').classList.toggle('active', parts.has('monitor'));
+            document.getElementById('bp-vmount').classList.toggle('active', parts.has('vmount'));
+            document.getElementById('bp-light').classList.toggle('active', parts.has('led') || parts.has('flash'));
+        }
+
+        function generateGuide(body, lens, extras) {
+            const stepsList = document.getElementById('assemblySteps');
+            stepsList.innerHTML = '';
+            
+            if (!body && !lens && extras.length === 0) {
+                stepsList.innerHTML = '<li class="empty-step">Выберите камеру и объектив слева, чтобы построить схему и получить инструкцию ✨</li>';
+                return;
+            }
+            
+            const steps = [];
+            
+            if (body) {
+                steps.push(`<strong>1. Подготовка базы:</strong> Вставьте аккумулятор и карту памяти в <em>${body}</em> до монтажа клетки.`);
+            }
+            if (extras.some(e => e.includes('Клетка'))) {
+                steps.push(`<strong>2. Монтаж клетки:</strong> Наденьте <em>клетку (Cage)</em> и затяните нижний винт 1/4" и боковые стопоры.`);
+            }
+            if (lens) {
+                steps.push(`<strong>3. Установка оптики:</strong> Совместите метки байонета и пристегните <em>${lens}</em> до щелчка.`);
+            }
+            if (extras.some(e => e.includes('Компендиум'))) {
+                steps.push(`<strong>4. Компендиум:</strong> Закрепите <em>Matte Box</em> на переднюю часть объектива и вставьте ND-фильтр.`);
+            }
+            if (extras.some(e => e.includes('ручка') || e.includes('рукоятка'))) {
+                steps.push(`<strong>5. Эргономика:</strong> Прикрутите <em>рукоятки</em> и проверьте баланс хватом одной рукой.`);
+            }
+            if (extras.some(e => e.includes('свет') || e.includes('вспышка') || e.includes('Монитор'))) {
+                steps.push(`<strong>6. Свет и экран:</strong> Установите <em>свет / монитор</em> на холодный башмак или кронштейн, зафиксируйте кабели.`);
+            }
+            if (extras.some(e => e.includes('V-Mount'))) {
+                steps.push(`<strong>7. Питание (строго в конце!):</strong> Подключите <em>V-Mount</em> последним, чтобы избежать скачка напряжения в HDMI.`);
+            }
+            
+            steps.forEach(text => {
+                const li = document.createElement('li');
+                li.className = 'step-item';
+                li.innerHTML = `<span class="step-check"></span><div>${text}</div>`;
+                li.addEventListener('click', () => {
+                    li.classList.toggle('done');
+                });
+                stepsList.appendChild(li);
+            });
+        }
+
+        function applyPreset(type, btnEl) {
+            document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+            if (btnEl && type !== 'clear') btnEl.classList.add('active');
+            
+            const bodySelect = document.getElementById('selectBody');
+            const lensSelect = document.getElementById('selectLens');
+            const checkboxes = document.querySelectorAll('.rig-item');
+            
+            bodySelect.selectedIndex = 0;
+            lensSelect.selectedIndex = 0;
+            checkboxes.forEach(cb => cb.checked = false);
+            
+            if (type === 'street') {
+                bodySelect.selectedIndex = 4; // Fujifilm X-S20
+                lensSelect.selectedIndex = 1; // 35mm f/1.8
+                checkboxes[4].checked = true; // Мини RGB LED-свет
+            } else if (type === 'event') {
+                bodySelect.selectedIndex = 1; // Sony A7 IV
+                lensSelect.selectedIndex = 3; // 24-70mm f/2.8
+                checkboxes[5].checked = true; // Вспышка TTL
+            } else if (type === 'cinema') {
+                bodySelect.selectedIndex = 2; // Sony A7S III
+                lensSelect.selectedIndex = 5; // Кино-фикс 24mm T1.5
+                checkboxes[0].checked = true; // Клетка
+                checkboxes[1].checked = true; // Верхняя ручка
+                checkboxes[3].checked = true; // Компендиум
+                checkboxes[6].checked = true; // Монитор 5"
+                checkboxes[7].checked = true; // V-Mount батарея
+            }
+            
+            recalculateKit();
+        }
+
+        function copyKitSpec() {
+            if (!currentSummaryText) return;
+            navigator.clipboard.writeText(currentSummaryText).then(() => {
+                const btn = document.getElementById('copyKitBtn');
+                const oldText = btn.textContent;
+                btn.textContent = '✅ Скопировано в буфер обмена!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = oldText;
+                    btn.classList.remove('copied');
+                }, 2200);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', recalculateKit);
+    </script>
+</body>
+</html>

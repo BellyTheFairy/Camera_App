@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация | Photo Kit</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <!-- Видоискатель камеры (режим регистрации) -->
+    <div class="camera-hud">
+        <div class="hud-corner top-left"></div>
+        <div class="hud-corner top-right"></div>
+        <div class="hud-corner bottom-left"></div>
+        <div class="hud-corner bottom-right"></div>
+
+        <div class="hud-top">
+            <span class="rec-indicator"><span class="rec-dot new-film-dot"></span> NEW PROFILE</span>
+            <span class="cam-mode" id="focusStatus">AF-C • WAITING</span>
+            <span class="battery-icon">🎞️ <span id="expCounter">0/4</span> FIELDS</span>
+        </div>
+
+        <!-- Рамка автофокуса -->
+        <div class="focus-frame register-frame" id="focusFrame"></div>
+
+        <div class="hud-bottom">
+            <span>ISO 100</span>
+            <span>RAW + JPEG</span>
+            <span>f/1.4</span>
+            <span>[ READY ]</span>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <h2>Photo Kit 2026</h2>
+        <p class="subtitle">Регистрация фотографа</p>
+        
+        <form id="registerForm" action="/register" method="post">
+            <input type="hidden" name="action" value="register">
+            
+            <div class="input-group">
+                <input type="text" id="regUsername" name="username" required autocomplete="off">
+                <label>Придумайте логин</label>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="regEmail" name="email" required autocomplete="off">
+                <label>Электронная почта</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="regPassword" name="password" required>
+                <label>Пароль</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="regConfirmPassword" name="confirm_password" required>
+                <label>Повторите пароль</label>
+            </div>
+
+            <!-- Сообщения от камеры (подсказки/ошибки) -->
+            <div id="camToast" class="cam-toast"></div>
+
+            <button type="submit" class="btn-login" id="registerBtn">СОЗДАТЬ АККАУНТ</button>
+            
+            <div class="toggle-link">
+                Уже есть аккаунт? <a href="login.html">Войти</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('#registerForm input[type="text"], #registerForm input[type="email"], #registerForm input[type="password"]');
+            const focusFrame = document.getElementById('focusFrame');
+            const focusStatus = document.getElementById('focusStatus');
+            const expCounter = document.getElementById('expCounter');
+            const passInput = document.getElementById('regPassword');
+            const confirmInput = document.getElementById('regConfirmPassword');
+            const camToast = document.getElementById('camToast');
+            const registerForm = document.getElementById('registerForm');
+
+            // 1. Подсчёт заполненных полей в HUD камеры (0/4 -> 4/4)
+            function updateCounter() {
+                let filled = 0;
+                inputs.forEach(inp => {
+                    if (inp.value.trim().length > 0) filled++;
+                });
+                expCounter.textContent = `${filled}/${inputs.length}`;
+            }
+
+            // 2. Проверка совпадения паролей и управление цветом автофокуса
+            function checkFocus() {
+                const p1 = passInput.value;
+                const p2 = confirmInput.value;
+
+                if (p2.length > 0 && p1 !== p2) {
+                    focusFrame.classList.remove('focused');
+                    focusFrame.classList.add('out-of-focus');
+                    focusStatus.textContent = 'MF • ПАРОЛИ НЕ СОВПАДАЮТ';
+                    focusStatus.style.color = '#ff9500';
+                } else if (p1.length > 0 && p1 === p2) {
+                    focusFrame.classList.remove('out-of-focus');
+                    focusFrame.classList.add('focused');
+                    focusStatus.textContent = 'AF-S • LOCKED (OK)';
+                    focusStatus.style.color = '#34c759';
+                } else {
+                    focusFrame.classList.remove('out-of-focus');
+                    focusStatus.textContent = 'AF-C • FOCUSING...';
+                    focusStatus.style.color = '';
+                }
+            }
+
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    focusFrame.classList.add('focused');
+                    checkFocus();
+                });
+
+                input.addEventListener('blur', () => {
+                    focusFrame.classList.remove('focused', 'out-of-focus');
+                    focusStatus.textContent = 'AF-C • STANDBY';
+                    focusStatus.style.color = '';
+                });
+
+                input.addEventListener('input', () => {
+                    updateCounter();
+                    checkFocus();
+                });
+            });
+
+            function showToast(text) {
+                camToast.textContent = text;
+                camToast.classList.add('visible');
+                clearTimeout(window.toastTimer);
+                window.toastTimer = setTimeout(() => {
+                    camToast.classList.remove('visible');
+                }, 2500);
+            }
+
+            // 3. Защита от отправки, если пароли не совпадают
+            registerForm.addEventListener('submit', function(event) {
+                if (passInput.value !== confirmInput.value) {
+                    event.preventDefault();
+                    showToast('⚠️ Ошибка фокуса: пароли не совпадают!');
+                    confirmInput.focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

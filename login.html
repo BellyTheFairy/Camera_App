@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход | Photo Kit</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <!-- Ваши картинки на фоне -->
+    <!-- <img src="../../images/camera.png" class="bg-img img-camera-png" alt="Camera Icon"> 
+    <img src="../../images/camera1.jpg" class="bg-img img-camera1-jpg" alt="Camera Style">
+    <img src="../../images/photo1.jpg" class="bg-img img-photo1-jpg" alt="Photo Art"> -->
+    
+        <!-- Видоискатель камеры (Viewfinder) -->
+<div class="camera-hud">
+    <!-- Уголки экрана -->
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+
+    <!-- Верхняя панель камеры -->
+    <div class="hud-top">
+        <span class="rec-indicator"><span class="rec-dot"></span> REC</span>
+        <span class="cam-mode">RAW • 4K 60FPS</span>
+        <span class="battery-icon">🔋 98%</span>
+    </div>
+
+    <!-- Рамка автофокуса вокруг формы -->
+    <div class="focus-frame" id="focusFrame"></div>
+
+    <!-- Нижняя панель настроек экспозиции -->
+    <div class="hud-bottom">
+        <span>ISO 400</span>
+        <span>1/250</span>
+        <span>f/1.8</span>
+        <span>[ +0.3 EV ]</span>
+    </div>
+</div>
+
+    <div class="login-container">
+        <h2>Photo Kit 2026</h2>
+        
+        <form id="loginForm" action="/login" method="post">
+            <input type="hidden" name="action" value="login">
+            <div class="input-group">
+                <input type="text" name="username" required>
+                <label>Имя пользователя</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" required>
+                <label>Пароль</label>
+            </div>
+            <button type="submit" class="btn-login">ВОЙТИ</button>
+            <div class="toggle-link">
+                Нет аккаунта? <a href="register.html">Регистрация</a>
+            </div>
+        </form>
+
+        <form id="registerForm" action="/login" method="post" style="display: none;">
+            <input type="hidden" name="action" value="register">
+            <div class="input-group">
+                <input type="text" name="username" required>
+                <label>Логин</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" required>
+                <label>Пароль</label>
+            </div>
+            <button type="submit" class="btn-login">СОЗДАТЬ АККАУНТ</button>
+            <div class="toggle-link">
+                Уже есть? <a href="#" onclick="toggleForm()">Войти</a>
+            </div>
+        </form>
+    </div>
+
+   <script>
+    function toggleForm(event) {
+        if (event) event.preventDefault();
+        const login = document.getElementById('loginForm');
+        const register = document.getElementById('registerForm');
+        if (login.style.display === 'none') {
+            login.style.display = 'block';
+            register.style.display = 'none';
+        } else {
+            login.style.display = 'none';
+            register.style.display = 'block';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = loginForm.querySelector('.btn-login');
+        const toggleLink = loginForm.querySelector('.toggle-link');
+        
+        let escapeCount = 0;
+        const maxEscapes = 3;
+
+        loginBtn.style.transition = 'all 0.3s ease';
+
+        loginBtn.addEventListener('click', function(event) {
+            if (escapeCount < maxEscapes) {
+                event.preventDefault();
+                escapeCount++;
+
+                if (escapeCount === 1) {
+                    loginBtn.style.width = loginBtn.offsetWidth + 'px';
+                    document.body.appendChild(loginBtn);
+                }
+
+                // Сбрасываем любые отступы и привязки из style.css
+                loginBtn.style.position = 'fixed';
+                loginBtn.style.margin = '0';
+                loginBtn.style.right = 'auto';
+                loginBtn.style.bottom = 'auto';
+                loginBtn.style.zIndex = '9999';
+                // Масштабируем строго от левого верхнего угла, чтобы кнопка не уходила за левый/верхний край
+                loginBtn.style.transformOrigin = 'top left';
+
+                // Случайный масштаб от 0.7 до 1.3
+                const scale = Number((Math.random() * 0.6 + 0.7).toFixed(2));
+                loginBtn.style.transform = `scale(${scale})`;
+
+                // Реальные размеры кнопки с учётом нового масштаба
+                const realWidth = loginBtn.offsetWidth * scale;
+                const realHeight = loginBtn.offsetHeight * scale;
+
+                // Видимая область окна без полос прокрутки
+                const screenWidth = document.documentElement.clientWidth;
+                const screenHeight = document.documentElement.clientHeight;
+                const padding = 20;
+
+                // Гарантируем, что кнопка не выйдет ни за правый, ни за нижний край
+                const maxX = Math.max(padding, screenWidth - realWidth - padding);
+                const maxY = Math.max(padding, screenHeight - realHeight - padding);
+
+                const randomX = Math.floor(Math.random() * (maxX - padding + 1)) + padding;
+                const randomY = Math.floor(Math.random() * (maxY - padding + 1)) + padding;
+
+                loginBtn.style.left = randomX + 'px';
+                loginBtn.style.top = randomY + 'px';
+
+                const phrases = ['Ой, мимо!', 'Не поймаешь!', 'Почти!'];
+                loginBtn.textContent = phrases[escapeCount - 1];
+            } else {
+                // Возвращаем всё в исходное состояние и отправляем форму
+                loginBtn.style.position = '';
+                loginBtn.style.margin = '';
+                loginBtn.style.left = '';
+                loginBtn.style.top = '';
+                loginBtn.style.right = '';
+                loginBtn.style.bottom = '';
+                loginBtn.style.width = '';
+                loginBtn.style.transform = '';
+                loginBtn.style.transformOrigin = '';
+                loginBtn.textContent = 'ВОЙТИ';
+                
+                loginForm.insertBefore(loginBtn, toggleLink);
+                loginForm.submit();
+            }
+        });
+    });
+</script>
+
+    
+    
+</body>
+</html>
