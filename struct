@@ -1,0 +1,12 @@
+photokit/
+├── server.py            ← файл сервера из прошлого сообщения
+├── pages/
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── profile.html     ← новый переделанный файл
+│   ├── admin.html
+│   └── 404.html
+├── static/
+│   └── photokit.js      ← новая версия общего скрипта
+└── (users.csv, data.csv, logs.csv, static/avatars/ — создадутся сами при первом запуске)
