@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Kit 2026 — собери свой идеальный сетап</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%B7%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --candy:#ff4fa0; --candy-hot:#ff2f92; --candy-deep:#d6217f;
+  --berry:#8f1d5c; --plum:#4a0e33;
+  --blush:#fff3f9; --bubble:#ffd6ea; --paper:#fffafd;
+  --peach:#ffd9c2; --lilac:#e3d0ff;
+  --mint:#0fae8d; --amber:#ffaa1f; --danger:#e5484d; --electric:#3e63ff;
+  --glass:rgba(255,255,255,.66); --line:rgba(214,33,127,.20);
+  --shadow:0 24px 60px rgba(214,33,127,.20), 0 4px 14px rgba(214,33,127,.12);
+  --font-display:'Unbounded',system-ui,sans-serif;
+  --font-body:'Manrope',system-ui,sans-serif;
+  --font-mono:ui-monospace,'JetBrains Mono','Courier New',monospace;
+  --nav-h:64px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;scrollbar-width:thin;scrollbar-color:var(--candy) var(--bubble)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bubble)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--candy),var(--candy-deep));border-radius:8px;border:2px solid var(--bubble)}
+::-webkit-scrollbar-thumb:hover{background:var(--candy-deep)}
+body{margin:0;min-height:100vh;font-family:var(--font-body);color:var(--plum);background-color:#ffe1ef;overflow-x:hidden}
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(46% 38% at 14% 16%,rgba(255,217,194,.85) 0%,rgba(255,217,194,0) 70%),
+    radial-gradient(42% 36% at 86% 12%,rgba(227,208,255,.8) 0%,rgba(227,208,255,0) 70%),
+    radial-gradient(60% 46% at 50% 96%,rgba(255,79,160,.30) 0%,rgba(255,79,160,0) 72%),
+    radial-gradient(70% 60% at 50% 45%,rgba(255,255,255,.75) 0%,rgba(255,240,247,.2) 60%,rgba(255,214,234,.5) 100%);}
+.bg-glow{position:fixed;z-index:0;pointer-events:none;border-radius:50%;filter:blur(70px);opacity:.5}
+.bg-glow.g1{width:44vw;height:44vw;left:-12vw;top:22vh;background:radial-gradient(circle,rgba(255,122,185,.55),transparent 70%);animation:glowDrift 26s ease-in-out infinite alternate}
+.bg-glow.g2{width:38vw;height:38vw;right:-10vw;top:52vh;background:radial-gradient(circle,rgba(186,140,255,.4),transparent 70%);animation:glowDrift 32s ease-in-out infinite alternate-reverse}
+@keyframes glowDrift{from{transform:translate(0,0) scale(1)}to{transform:translate(6vw,-8vh) scale(1.15)}}
+.bg-cam{position:fixed;z-index:0;pointer-events:none;filter:drop-shadow(0 18px 22px rgba(214,33,127,.28));opacity:.5;animation:camFloat 16s ease-in-out infinite alternate}
+@keyframes camFloat{from{transform:translateY(0) rotate(var(--rot))}to{transform:translateY(-34px) rotate(calc(var(--rot) + 6deg))}}
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");}
+.spark{position:fixed;z-index:1;pointer-events:none;color:#fff;text-shadow:0 0 14px rgba(255,255,255,.95);animation:drift 9s ease-in-out infinite;opacity:.85}
+@keyframes drift{0%,100%{transform:translateY(0) rotate(0deg);opacity:.45}50%{transform:translateY(-24px) rotate(22deg);opacity:1}}
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:60;width:min(1160px,calc(100% - 24px));height:var(--nav-h);
+  display:flex;align-items:center;gap:12px;padding:0 18px;border-radius:999px;
+  background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(1.3);border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 12px 34px rgba(214,33,127,.18);}
+.nav-brand{display:flex;align-items:center;gap:9px;font:800 13px var(--font-display);letter-spacing:.04em;color:var(--candy-deep);text-decoration:none;white-space:nowrap}
+.nav-brand .dot{width:10px;height:10px;border-radius:50%;background:var(--danger);box-shadow:0 0 10px var(--danger);animation:blink 1.4s infinite}
+@keyframes blink{0%,55%{opacity:1}56%,100%{opacity:.25}}
+.nav-links{display:flex;gap:4px;margin-left:6px}
+.nav-links a{font:700 12.5px var(--font-body);color:var(--berry);text-decoration:none;padding:8px 13px;border-radius:999px;transition:background .2s,color .2s}
+.nav-links a:hover{background:rgba(255,79,160,.12)}
+.nav-links a.active{background:linear-gradient(135deg,var(--candy),var(--candy-deep));color:#fff;box-shadow:0 6px 16px rgba(214,33,127,.3)}
+.nav-spacer{flex:1}
+.nav-btn{border:none;cursor:pointer;font:700 11px var(--font-mono);letter-spacing:.1em;color:var(--berry);background:rgba(255,255,255,.7);border:1px solid var(--line);padding:8px 13px;border-radius:999px;transition:background .2s,transform .12s}
+.nav-btn:hover{background:#fff}
+.nav-btn:active{transform:scale(.95)}
+.nav-cta{font:800 12px var(--font-display);letter-spacing:.05em;color:#fff;text-decoration:none;padding:11px 20px;border-radius:999px;background:linear-gradient(135deg,#ff77b9,#ff2f92 55%,#d6217f);box-shadow:0 8px 20px rgba(214,33,127,.35),inset 0 2px 0 rgba(255,255,255,.4);transition:transform .18s,filter .18s;white-space:nowrap}
+.nav-cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.nav-ghost{font:800 12px var(--font-body);color:var(--candy-deep);text-decoration:none;padding:10px 14px;border-radius:999px;border:2px solid var(--line);transition:border-color .2s,background .2s;white-space:nowrap}
+.nav-ghost:hover{border-color:var(--candy);background:#fff}
+.camera-hud{position:fixed;inset:0;z-index:50;pointer-events:none;font-family:var(--font-mono);color:var(--berry);user-select:none}
+.hud-corner{position:absolute;width:32px;height:32px;border:3px solid var(--candy-deep);filter:drop-shadow(0 0 6px rgba(255,79,160,.45))}
+.top-left{top:calc(var(--nav-h) + 26px);left:16px;border-width:3px 0 0 3px;border-radius:8px 0 0 0}
+.top-right{top:calc(var(--nav-h) + 26px);right:16px;border-width:3px 3px 0 0;border-radius:0 8px 0 0}
+.bottom-left{bottom:16px;left:16px;border-width:0 0 3px 3px;border-radius:0 0 0 8px}
+.bottom-right{bottom:16px;right:16px;border-width:0 3px 3px 0;border-radius:0 0 8px 0}
+.hud-bottom{position:absolute;left:62px;right:62px;bottom:20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:11.5px;font-weight:700;letter-spacing:.12em}
+.hud-chip{background:rgba(255,255,255,.66);border:1px solid var(--line);padding:5px 13px;border-radius:999px;backdrop-filter:blur(6px);transition:color .3s,border-color .3s}
+.hud-chip.warn{color:var(--amber);border-color:rgba(255,170,31,.5)}
+.hud-chip.bad{color:var(--danger);border-color:rgba(229,72,77,.5)}
+.hud-chip.good{color:var(--mint);border-color:rgba(15,174,141,.5)}
+.wrap{position:relative;z-index:10;max-width:1200px;margin:0 auto;padding:calc(var(--nav-h) + 58px) 26px 60px}
+section{scroll-margin-top:96px}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;margin-bottom:26px}
+.badge{display:inline-flex;align-items:center;gap:8px;font:700 10.5px var(--font-mono);letter-spacing:.22em;color:var(--candy-deep);background:rgba(255,255,255,.72);border:1px solid var(--line);padding:6px 16px;border-radius:999px;margin-bottom:16px}
+.hero h1{margin:0 0 12px;font:800 clamp(28px,5vw,44px)/1.12 var(--font-display);background:linear-gradient(100deg,var(--berry),var(--candy-hot) 45%,var(--candy-deep) 80%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{margin:0 0 18px;max-width:56ch;font-size:14.5px;line-height:1.65;color:var(--berry)}
+.hero-stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat-chip{font:700 11px var(--font-mono);letter-spacing:.08em;color:var(--berry);background:rgba(255,255,255,.6);border:1px dashed var(--line);padding:5px 12px;border-radius:999px}
+.hero-art{position:relative;height:360px}
+.art{position:absolute;filter:drop-shadow(0 16px 20px rgba(214,33,127,.30));animation:artFloat 6s ease-in-out infinite alternate}
+@keyframes artFloat{from{translate:0 0}to{translate:0 -16px}}
+.main-cam{width:72%;left:14%;top:44px;z-index:3}
+.side-lens{width:46%;left:-3%;bottom:44px;transform:rotate(-12deg);z-index:2;animation-delay:-2s}
+.side-flash{width:25%;right:1%;top:0;transform:rotate(10deg);z-index:2;animation-delay:-4s}
+.art-shadow{position:absolute;height:18px;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(143,29,92,.35),transparent 70%);filter:blur(6px);animation:shadowBreath 6s ease-in-out infinite alternate}
+@keyframes shadowBreath{from{transform:scaleX(1);opacity:.8}to{transform:scaleX(.78);opacity:.45}}
+.art-shadow.s1{left:24%;right:24%;bottom:26px}
+.art-shadow.s2{left:2%;width:38%;bottom:18px;animation-delay:-2s}
+.art-shadow.s3{right:3%;width:20%;bottom:52px;animation-delay:-4s}
+.hero-art .spark{position:absolute;z-index:4}
+.presets{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.preset-btn{cursor:pointer;font:700 12.5px var(--font-body);color:var(--berry);background:rgba(255,255,255,.72);border:2px solid var(--line);padding:10px 16px;border-radius:999px;transition:transform .18s,border-color .18s,background .18s,box-shadow .18s}
+.preset-btn:hover{transform:translateY(-2px);border-color:var(--candy);box-shadow:0 8px 18px rgba(214,33,127,.18)}
+.preset-btn.active{background:linear-gradient(135deg,var(--candy),var(--candy-deep));border-color:transparent;color:#fff;box-shadow:0 10px 22px rgba(214,33,127,.35)}
+.preset-btn.reset:hover{border-color:var(--danger)}
+.grid{display:grid;grid-template-columns:1.08fr 1fr;gap:26px;align-items:start}
+.card{position:relative;background:var(--glass);backdrop-filter:blur(20px) saturate(1.25);border:1px solid rgba(255,255,255,.9);border-radius:26px;box-shadow:var(--shadow);padding:24px;margin-bottom:20px;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0 0 auto 0;height:70px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));pointer-events:none}
+.card-art{display:block;width:100%;height:106px;margin:0 0 16px;position:relative;overflow:hidden;border-radius:16px;background:linear-gradient(120deg,rgba(255,255,255,.55),rgba(255,214,234,.4));border:1px solid var(--line)}
+.card-art svg{width:100%;height:100%;display:block}
+.card-art::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.6) 50%,transparent 58%);transform:translateX(-130%);animation:shine 6s ease-in-out infinite;pointer-events:none}
+.card:nth-of-type(2) .card-art::after{animation-delay:-1.5s}
+.card:nth-of-type(3) .card-art::after{animation-delay:-3s}
+.card:nth-of-type(4) .card-art::after{animation-delay:-4.5s}
+@keyframes shine{0%,55%{transform:translateX(-130%)}80%,100%{transform:translateX(130%)}}
+.card-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.card-title h3{margin:0;font:700 14px var(--font-display);color:var(--candy-deep)}
+.tag{font:700 9.5px var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--berry);background:rgba(255,255,255,.7);border:1px solid var(--line);padding:4px 10px;border-radius:8px}
+.kit-select{width:100%;padding:14px 16px;font:600 14px var(--font-body);color:var(--plum);background:rgba(255,255,255,.85);border:2px solid var(--line);border-radius:14px;outline:none;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.kit-select:focus{border-color:var(--candy);box-shadow:0 0 0 4px rgba(255,79,160,.18)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{position:relative;display:flex;align-items:center;gap:12px;padding:13px 34px 13px 14px;background:rgba(255,255,255,.62);border:2px solid var(--line);border-radius:16px;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s,transform .15s;user-select:none}
+.tile:hover{border-color:var(--candy);transform:translateY(-1px)}
+.tile:has(input:checked){border-color:var(--candy-hot);background:linear-gradient(135deg,rgba(255,119,185,.22),rgba(255,255,255,.75));box-shadow:0 8px 20px rgba(214,33,127,.18)}
+.tile input{accent-color:var(--candy-hot);width:18px;height:18px;cursor:pointer;flex:none}
+.tile-name{display:block;font:800 12.5px var(--font-body);color:var(--plum)}
+.tile-meta{display:block;font:600 10.5px var(--font-mono);color:var(--berry);margin-top:3px}
+.info-dot{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.85);color:var(--candy-deep);font:800 11px var(--font-mono);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s,transform .12s;z-index:2}
+.info-dot:hover{background:linear-gradient(135deg,var(--candy),var(--candy-deep));color:#fff;border-color:transparent}
+.info-dot:active{transform:scale(.9)}
+.studio{position:sticky;top:calc(var(--nav-h) + 26px);max-height:calc(100vh - var(--nav-h) - 52px);overflow-y:auto;overscroll-behavior:contain}
+.stage{position:relative;background:rgba(255,255,255,.55);border:2px dashed var(--line);border-radius:18px;padding:10px;margin-bottom:8px}
+.stage-label{position:absolute;top:8px;left:12px;font:700 9px var(--font-mono);letter-spacing:.2em;color:var(--candy-deep);opacity:.75;z-index:2}
+.stage svg{display:block;width:100%;height:auto}
+.stage-hint{font:700 10.5px var(--font-mono);letter-spacing:.05em;color:var(--berry);background:rgba(255,255,255,.6);border:1px dashed var(--line);border-radius:12px;padding:7px 12px;margin:0 0 16px;text-align:center}
+.bp{opacity:0;transform:scale(.72);transform-box:fill-box;transform-origin:center;transition:opacity .35s ease,transform .45s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.bp.on{opacity:1;transform:scale(1);pointer-events:auto;cursor:pointer}
+.bp.on:hover,.bp.on:focus-visible{filter:drop-shadow(0 0 7px rgba(255,47,146,.95))}
+.bp.on:focus-visible{outline:none}
+.bp-label{font:700 8px var(--font-mono);letter-spacing:.08em;fill:var(--berry);opacity:0;transition:opacity .3s;pointer-events:none}
+svg.labels .bp-label{opacity:.85}
+.gridlayer{opacity:0;transition:opacity .3s}
+svg.grid .gridlayer{opacity:1}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.ctl{background:rgba(255,255,255,.62);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.ctl-head{display:flex;justify-content:space-between;font:700 10px var(--font-mono);letter-spacing:.1em;color:var(--berry);margin-bottom:8px}
+.ctl-head output{color:var(--candy-deep)}
+input[type=range]{width:100%;appearance:none;-webkit-appearance:none;height:8px;border-radius:6px;background:linear-gradient(90deg,var(--bubble),var(--candy));outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#fff,#ff77b9 45%,var(--candy-deep));border:2px solid #fff;box-shadow:0 4px 10px rgba(214,33,127,.4);cursor:grab}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#fff,#ff77b9 45%,var(--candy-deep));border:2px solid #fff;box-shadow:0 4px 10px rgba(214,33,127,.4);cursor:grab}
+.ctl-toggles{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap}
+.switch{flex:1 1 120px;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;background:rgba(255,255,255,.62);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font:700 11px var(--font-mono);letter-spacing:.08em;color:var(--berry);transition:border-color .2s}
+.switch:hover{border-color:var(--candy)}
+.switch input{display:none}
+.sw-track{width:38px;height:20px;border-radius:999px;background:rgba(214,33,127,.18);position:relative;transition:background .25s;flex:none}
+.sw-track::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(74,14,51,.3);transition:left .25s cubic-bezier(.34,1.56,.64,1)}
+.switch input:checked + .sw-track{background:linear-gradient(90deg,var(--candy),var(--candy-deep))}
+.switch input:checked + .sw-track::after{left:20px}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.metric{background:rgba(255,255,255,.68);border:1px solid var(--line);border-radius:16px;padding:13px 15px}
+.metric-label{display:block;font:700 9.5px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--berry);margin-bottom:6px}
+.metric-value{font:800 21px var(--font-display);color:var(--plum)}
+.metric-value.price{color:var(--candy-deep)}
+.metric.over .metric-value.price{color:var(--danger)}
+.metric.pop .metric-value{animation:pop .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(.86)}to{transform:scale(1)}}
+.meter{margin-bottom:14px}
+.meter-head{display:flex;justify-content:space-between;gap:8px;font:700 10.5px var(--font-mono);letter-spacing:.06em;color:var(--berry);margin-bottom:7px}
+.meter-bar{height:9px;border-radius:8px;background:rgba(214,33,127,.12);border:1px solid var(--line);overflow:hidden}
+.meter-fill{height:100%;width:0%;border-radius:8px;background:linear-gradient(90deg,#ff77b9,var(--candy-hot));box-shadow:0 0 10px rgba(255,47,146,.4);transition:width .45s cubic-bezier(.22,1,.36,1),background .3s}
+.meter-fill.warn{background:linear-gradient(90deg,#ffc65c,var(--amber))}
+.meter-fill.bad{background:linear-gradient(90deg,#ff7a80,var(--danger))}
+.meter-fill.good{background:linear-gradient(90deg,#5ad4b8,var(--mint))}
+.guide-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:12px}
+.guide-head h3{margin:0;font:700 13px var(--font-display);color:var(--candy-deep)}
+.guide-progress{font:700 10.5px var(--font-mono);color:var(--mint)}
+.steps{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;gap:9px}
+.empty-step{font:600 12.5px var(--font-body);color:var(--berry);text-align:center;padding:14px;background:rgba(255,255,255,.55);border:1px dashed var(--line);border-radius:14px}
+.step{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;background:rgba(255,255,255,.62);border:1px solid var(--line);border-radius:14px;font-size:12.5px;line-height:1.5;color:var(--plum);cursor:pointer;transition:border-color .2s,background .2s,opacity .2s}
+.step:hover{border-color:var(--candy)}
+.step-check{flex:none;width:18px;height:18px;margin-top:1px;border:2px solid var(--line);border-radius:6px;display:grid;place-items:center;transition:background .2s,border-color .2s}
+.step.done{opacity:.55}
+.step.done .step-text{text-decoration:line-through}
+.step.done .step-check{background:var(--mint);border-color:var(--mint)}
+.step.done .step-check::after{content:'✓';color:#fff;font-size:11px;font-weight:800}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{border:none;cursor:pointer;padding:13px 14px;border-radius:14px;font:800 12px var(--font-display);letter-spacing:.04em;transition:transform .18s,filter .18s,box-shadow .18s,border-color .18s;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn:active{transform:scale(.97)}
+.btn-candy{grid-column:1/-1;color:#fff;background:linear-gradient(135deg,#ff77b9,#ff2f92 55%,#d6217f);box-shadow:0 10px 24px rgba(214,33,127,.35),inset 0 2px 0 rgba(255,255,255,.4)}
+.btn-candy:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn-candy.copied{background:linear-gradient(135deg,#3ec9a7,var(--mint));box-shadow:0 10px 24px rgba(15,174,141,.35)}
+.btn-candy.remove{background:linear-gradient(135deg,#ff8a8e,var(--danger));box-shadow:0 10px 24px rgba(229,72,77,.3)}
+.btn-ghost{color:var(--candy-deep);background:rgba(255,255,255,.75);border:2px solid var(--line)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--candy)}
+.gallery-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin:40px 0 18px}
+.gallery-head h2{margin:0 0 6px;font:800 clamp(20px,3.4vw,28px)/1.2 var(--font-display);background:linear-gradient(100deg,var(--berry),var(--candy-hot) 55%,var(--candy-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.gallery-head p{margin:0;font-size:13px;color:var(--berry);max-width:52ch}
+.stickers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.sticker-wrap{position:relative}
+.sticker{position:relative;width:100%;cursor:pointer;border:2px solid var(--line);border-radius:20px;background:var(--glass);backdrop-filter:blur(14px);padding:14px 14px 13px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 10px 26px rgba(214,33,127,.14);transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;font-family:var(--font-body)}
+.sticker:hover{transform:translateY(-5px);border-color:var(--candy);box-shadow:0 18px 36px rgba(214,33,127,.24)}
+.sticker:active{transform:translateY(-2px) scale(.98)}
+.sticker-art{position:relative;width:100%;height:112px;display:grid;place-items:center}
+.sticker-art svg{width:84%;height:100%;filter:drop-shadow(0 10px 12px rgba(214,33,127,.3));animation:artFloat 6s ease-in-out infinite alternate}
+.sticker-wrap:nth-child(2n) .sticker-art svg{animation-delay:-2s}
+.sticker-wrap:nth-child(3n) .sticker-art svg{animation-delay:-4s}
+.sticker-shadow{position:absolute;bottom:0;left:22%;right:22%;height:12px;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(143,29,92,.32),transparent 70%);filter:blur(5px);animation:shadowBreath 6s ease-in-out infinite alternate}
+.sticker-spark{position:absolute;top:2px;left:8px;color:#fff;font-size:14px;text-shadow:0 0 12px rgba(255,255,255,.95);animation:drift 7s ease-in-out infinite}
+.sticker-name{font:800 12.5px var(--font-body);color:var(--plum);text-align:center}
+.sticker-meta{font:600 10.5px var(--font-mono);color:var(--berry)}
+.sticker-state{font:800 10px var(--font-mono);letter-spacing:.08em;color:var(--candy-deep);background:rgba(255,255,255,.75);border:1px solid var(--line);padding:4px 12px;border-radius:999px;transition:background .25s,color .25s,border-color .25s}
+.sticker.in-kit{border-color:var(--candy-hot);background:linear-gradient(160deg,rgba(255,119,185,.28),rgba(255,255,255,.82));box-shadow:0 16px 34px rgba(214,33,127,.28)}
+.sticker.in-kit .sticker-state{background:linear-gradient(135deg,#3ec9a7,var(--mint));color:#fff;border-color:transparent}
+.filmstrip{position:relative;z-index:10;max-width:1020px;margin:46px auto 20px;padding:18px 20px;border-radius:14px;background:linear-gradient(180deg,#8f1d5c,#5c1140);transform:rotate(-1.2deg);box-shadow:0 22px 44px rgba(74,14,51,.35);display:flex;gap:14px;overflow-x:auto;overscroll-behavior:contain}
+.filmstrip::before,.filmstrip::after{content:'';position:absolute;left:12px;right:12px;height:7px;background:repeating-linear-gradient(90deg,rgba(255,240,247,.9) 0 10px,transparent 10px 24px);border-radius:3px}
+.filmstrip::before{top:5px}
+.filmstrip::after{bottom:5px}
+.frame{flex:none;width:128px;height:80px;border-radius:9px;background:linear-gradient(135deg,#ffe3f1,#ff9cc9);display:grid;place-items:center;box-shadow:inset 0 2px 6px rgba(255,255,255,.6),inset 0 -4px 10px rgba(143,29,92,.25)}
+.frame svg{width:88%;height:88%;filter:drop-shadow(0 5px 7px rgba(143,29,92,.35))}
+.frame:nth-child(2n) svg{transform:rotate(6deg)}
+.frame:nth-child(3n) svg{transform:rotate(-7deg)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+#toast{position:fixed;top:calc(var(--nav-h) + 26px);left:50%;transform:translate(-50%,-16px);z-index:120;opacity:0;pointer-events:none;
+  font:700 12px var(--font-mono);letter-spacing:.04em;color:var(--berry);background:rgba(255,255,255,.92);border:1px solid var(--line);
+  padding:10px 18px;border-radius:999px;box-shadow:0 12px 30px rgba(214,33,127,.25);backdrop-filter:blur(10px);transition:opacity .3s,transform .3s;max-width:calc(100vw - 40px);text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+footer{position:relative;z-index:10;text-align:center;padding:0 20px 96px;font:600 11px var(--font-mono);letter-spacing:.12em;color:var(--berry)}
+footer a{color:var(--candy-deep);text-decoration:none;font-weight:800}
+footer a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid rgba(255,79,160,.55);outline-offset:2px;border-radius:8px}
+/* ---- модалка модуля ---- */
+.modal-scrim{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:22px;background:rgba(74,14,51,.45);backdrop-filter:blur(9px);animation:scrimIn .25s ease}
+.modal-scrim[hidden]{display:none}
+@keyframes scrimIn{from{opacity:0}to{opacity:1}}
+.modal{position:relative;width:min(780px,100%);max-height:min(88vh,760px);display:grid;grid-template-columns:300px 1fr;background:rgba(255,250,253,.94);backdrop-filter:blur(24px) saturate(1.3);border:1px solid rgba(255,255,255,.95);border-radius:26px;box-shadow:0 40px 90px rgba(74,14,51,.45);overflow:hidden;animation:modalIn .38s cubic-bezier(.22,1,.36,1)}
+@keyframes modalIn{from{opacity:0;transform:translateY(26px) scale(.94)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:12px;right:12px;z-index:5;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.9);color:var(--candy-deep);font:800 14px var(--font-body);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s,transform .15s}
+.modal-close:hover{background:linear-gradient(135deg,var(--candy),var(--candy-deep));color:#fff;border-color:transparent}
+.modal-close:active{transform:scale(.9)}
+.modal-art{position:relative;display:grid;place-items:center;padding:26px 20px;background:linear-gradient(160deg,#ffe9f4 0%,#ffb7d9 55%,#ff8fc0 100%);overflow:hidden}
+.modal-art::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 46% at 50% 40%,rgba(255,255,255,.75),transparent 70%)}
+.modal-art svg{position:relative;width:90%;max-height:250px;filter:drop-shadow(0 18px 22px rgba(143,29,92,.35));animation:artFloat 6s ease-in-out infinite alternate}
+.modal-art-shadow{position:absolute;bottom:34px;left:22%;right:22%;height:16px;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(143,29,92,.4),transparent 70%);filter:blur(6px);animation:shadowBreath 6s ease-in-out infinite alternate}
+.modal-art .spark{position:absolute;z-index:3}
+.modal-art-tag{position:absolute;top:14px;left:14px;font:700 9px var(--font-mono);letter-spacing:.2em;color:var(--berry);background:rgba(255,255,255,.8);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+.modal-body{padding:26px 26px 22px;overflow-y:auto;overscroll-behavior:contain}
+.modal-body h3{margin:10px 0 8px;font:800 clamp(19px,3vw,24px)/1.2 var(--font-display);background:linear-gradient(100deg,var(--berry),var(--candy-hot) 55%,var(--candy-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.modal-body p{margin:0 0 12px;font-size:13.5px;line-height:1.6;color:var(--plum)}
+.modal-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chip-benefit{font:700 10.5px var(--font-mono);letter-spacing:.04em;color:var(--berry);background:rgba(255,255,255,.75);border:1px dashed var(--line);padding:5px 11px;border-radius:999px}
+.modal-specs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.spec-chip{font:800 11px var(--font-mono);padding:6px 12px;border-radius:10px}
+.spec-chip.w{color:var(--berry);background:rgba(255,170,31,.16);border:1px solid rgba(255,170,31,.4)}
+.spec-chip.p{color:var(--candy-deep);background:rgba(255,79,160,.14);border:1px solid rgba(255,79,160,.35)}
+.spec-chip.s{color:var(--mint);background:rgba(15,174,141,.12);border:1px solid rgba(15,174,141,.4)}
+.modal-body h4{margin:0 0 10px;font:700 11px var(--font-mono);letter-spacing:.18em;color:var(--candy-deep)}
+.brand-list{list-style:none;margin:0 0 18px;padding:0;display:flex;flex-direction:column;gap:8px}
+.brand-list li{display:flex;align-items:center;gap:12px;padding:10px 12px;background:rgba(255,255,255,.66);border:1px solid var(--line);border-radius:14px;transition:border-color .2s,transform .15s}
+.brand-list li:hover{border-color:var(--candy);transform:translateX(2px)}
+.brand-badge{flex:none;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ff77b9,#d6217f);color:#fff;font:800 14px var(--font-display);display:grid;place-items:center;box-shadow:inset 0 2px 0 rgba(255,255,255,.4)}
+.brand-name{display:block;font:800 12.5px var(--font-body);color:var(--plum)}
+.brand-model{display:block;font:600 10.5px var(--font-mono);color:var(--berry);margin-top:2px}
+.brand-price{margin-left:auto;font:800 12.5px var(--font-mono);color:var(--candy-deep);white-space:nowrap}
+.brand-choose{flex:none;border:2px solid var(--line);background:rgba(255,255,255,.85);color:var(--candy-deep);font:800 10px var(--font-mono);letter-spacing:.06em;padding:7px 11px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.brand-choose:hover{background:linear-gradient(135deg,var(--candy),var(--candy-deep));color:#fff;border-color:transparent}
+.modal-actions{display:grid;grid-template-columns:1fr auto;gap:10px}
+.modal-actions .btn-candy{grid-column:auto}
+@media (max-width:960px){
+  .grid{grid-template-columns:1fr}
+  .studio{position:static;max-height:none;overflow:visible}
+  .nav-links{display:none}
+  .nav-ghost{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-art{height:290px;order:2}
+  .stickers{grid-template-columns:repeat(2,1fr)}
+  .modal{grid-template-columns:1fr;max-height:88vh;overflow-y:auto}
+  .modal-art{min-height:190px;padding:20px}
+  .modal-art svg{max-height:160px}
+  .modal-body{overflow:visible}
+}
+@media (max-width:560px){
+  .wrap{padding-left:14px;padding-right:14px}
+  .tiles{grid-template-columns:1fr}
+  .controls{grid-template-columns:1fr}
+  .hud-bottom{left:16px;right:16px;font-size:9.5px}
+  .hud-corner{width:22px;height:22px}
+  .card{padding:18px}
+  .hero-art{height:240px}
+  .stickers{gap:12px}
+  .sticker-art{height:92px}
+  .modal-actions{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+<script src="../static/photokit.js"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="sBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe9f4"/><stop offset=".45" stop-color="#ff9cc9"/><stop offset=".78" stop-color="#ef5fa7"/><stop offset="1" stop-color="#d6217f"/>
+    </linearGradient>
+    <linearGradient id="sPart" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff5fa"/><stop offset=".6" stop-color="#ffc3dd"/><stop offset="1" stop-color="#ff8fc0"/>
+    </linearGradient>
+    <linearGradient id="sLens" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd6ea"/><stop offset=".5" stop-color="#ff9cc9"/><stop offset="1" stop-color="#d6217f"/>
+    </linearGradient>
+    <radialGradient id="sLensFace" cx=".35" cy=".3" r=".85">
+      <stop offset="0" stop-color="#ffe3f1"/><stop offset=".55" stop-color="#ff8fc0"/><stop offset="1" stop-color="#c22a7e"/>
+    </radialGradient>
+    <radialGradient id="sGlass" cx=".35" cy=".3" r=".95">
+      <stop offset="0" stop-color="#d989b8"/><stop offset=".55" stop-color="#8f1d5c"/><stop offset="1" stop-color="#4a0e33"/>
+    </radialGradient>
+    <radialGradient id="sGlassCore" cx=".4" cy=".35" r=".8">
+      <stop offset="0" stop-color="#ff9cc9"/><stop offset=".5" stop-color="#c4589a"/><stop offset="1" stop-color="#6b1547"/>
+    </radialGradient>
+    <linearGradient id="sScreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3e63ff"/><stop offset=".55" stop-color="#b06bff"/><stop offset="1" stop-color="#ff4fa0"/>
+    </linearGradient>
+    <linearGradient id="sAmber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe3a3"/><stop offset="1" stop-color="#ffaa1f"/>
+    </linearGradient>
+    <linearGradient id="bgBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe3f1"/><stop offset=".5" stop-color="#ff9cc9"/><stop offset="1" stop-color="#f06bab"/>
+    </linearGradient>
+    <linearGradient id="bgLens" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffb1d4"/><stop offset="1" stop-color="#d6217f"/>
+    </linearGradient>
+    <radialGradient id="bgGlass" cx=".35" cy=".3" r=".9">
+      <stop offset="0" stop-color="#c4589a"/><stop offset=".6" stop-color="#8f1d5c"/><stop offset="1" stop-color="#4a0e33"/>
+    </radialGradient>
+
+    <symbol id="camSym" viewBox="0 0 120 90">
+      <rect x="40" y="12" width="40" height="20" rx="8" fill="url(#bgBody)"/>
+      <rect x="8" y="26" width="104" height="56" rx="13" fill="url(#bgBody)"/>
+      <rect x="12" y="30" width="96" height="12" rx="6" fill="#fff" opacity=".45"/>
+      <circle cx="60" cy="54" r="23" fill="url(#bgLens)"/>
+      <circle cx="60" cy="54" r="14" fill="url(#bgGlass)"/>
+      <ellipse cx="53" cy="46" rx="7" ry="4.5" fill="#fff" opacity=".75"/>
+      <circle cx="99" cy="37" r="4" fill="#fff" opacity=".85"/>
+    </symbol>
+
+    <symbol id="camGlossy" viewBox="0 0 220 160">
+      <circle cx="16" cy="70" r="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <circle cx="204" cy="70" r="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="76" y="16" width="68" height="36" rx="13" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2"/>
+      <rect x="84" y="21" width="52" height="10" rx="5" fill="#fff" opacity=".55"/>
+      <rect x="40" y="26" width="22" height="14" rx="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="176" y="28" width="20" height="12" rx="6" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="18" y="44" width="184" height="98" rx="22" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/>
+      <rect x="26" y="50" width="168" height="18" rx="9" fill="#fff" opacity=".5"/>
+      <rect x="26" y="126" width="168" height="10" rx="5" fill="#8f1d5c" opacity=".16"/>
+      <rect x="168" y="52" width="28" height="82" rx="13" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="173" y="58" width="8" height="66" rx="4" fill="#fff" opacity=".45"/>
+      <circle cx="102" cy="93" r="41" fill="url(#sLens)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/>
+      <circle cx="102" cy="93" r="33" fill="url(#sLensFace)"/>
+      <circle cx="102" cy="93" r="23" fill="url(#sGlass)"/>
+      <circle cx="102" cy="93" r="12" fill="url(#sGlassCore)"/>
+      <ellipse cx="90" cy="79" rx="10" ry="6" fill="#fff" opacity=".85" transform="rotate(-24 90 79)"/>
+      <circle cx="112" cy="103" r="3.5" fill="#fff" opacity=".6"/>
+      <path d="M30 62 Q24 92 30 124" stroke="#fff" stroke-opacity=".6" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="lensGlossy" viewBox="0 0 180 120">
+      <rect x="8" y="40" width="14" height="44" rx="6" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="18" y="32" width="122" height="58" rx="17" fill="url(#sLens)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/>
+      <rect x="44" y="32" width="12" height="58" fill="#fff" opacity=".3"/>
+      <rect x="78" y="32" width="8" height="58" fill="#8f1d5c" opacity=".2"/>
+      <rect x="102" y="32" width="10" height="58" fill="#fff" opacity=".25"/>
+      <rect x="25" y="37" width="108" height="12" rx="6" fill="#fff" opacity=".5"/>
+      <ellipse cx="142" cy="61" rx="14" ry="31" fill="url(#sLens)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2"/>
+      <ellipse cx="145" cy="61" rx="9" ry="23" fill="url(#sGlass)"/>
+      <ellipse cx="142" cy="49" rx="3" ry="7" fill="#fff" opacity=".8"/>
+    </symbol>
+
+    <symbol id="flashGlossy" viewBox="0 0 120 160">
+      <rect x="28" y="12" width="64" height="46" rx="13" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2"/>
+      <rect x="34" y="18" width="52" height="22" rx="7" fill="url(#sAmber)"/>
+      <rect x="38" y="21" width="44" height="7" rx="3.5" fill="#fff" opacity=".6"/>
+      <rect x="44" y="58" width="32" height="18" rx="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="36" y="74" width="48" height="52" rx="13" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2"/>
+      <rect x="41" y="79" width="38" height="9" rx="4.5" fill="#fff" opacity=".5"/>
+      <rect x="44" y="92" width="32" height="16" rx="5" fill="url(#sScreen)"/>
+      <circle cx="60" cy="116" r="4" fill="#0fae8d"/>
+      <rect x="48" y="126" width="24" height="12" rx="5" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+    </symbol>
+
+    <symbol id="monitorGlossy" viewBox="0 0 180 130">
+      <rect x="82" y="104" width="16" height="16" rx="5" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="14" y="12" width="152" height="94" rx="15" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/>
+      <rect x="22" y="20" width="136" height="78" rx="9" fill="url(#sScreen)"/>
+      <circle cx="132" cy="40" r="10" fill="#ffaa1f" opacity=".9"/>
+      <path d="M22 82 Q60 58 96 78 T158 72 V98 H22 Z" fill="#0fae8d" opacity=".45"/>
+      <path d="M30 20 L64 20 L40 98 L22 98 Z" fill="#fff" opacity=".3"/>
+      <circle cx="40" cy="112" r="5" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="1.5"/>
+      <circle cx="58" cy="112" r="5" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="1.5"/>
+    </symbol>
+
+    <symbol id="batteryGlossy" viewBox="0 0 120 150">
+      <rect x="44" y="6" width="32" height="12" rx="5" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="24" y="16" width="72" height="114" rx="15" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/>
+      <rect x="30" y="22" width="60" height="12" rx="6" fill="#fff" opacity=".5"/>
+      <path d="M42 44 L60 68 L78 44" stroke="#fff" stroke-opacity=".55" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="40" cy="96" r="4.5" fill="#0fae8d"/><circle cx="54" cy="96" r="4.5" fill="#0fae8d"/>
+      <circle cx="68" cy="96" r="4.5" fill="#0fae8d"/><circle cx="82" cy="96" r="4.5" fill="#ffaa1f"/>
+      <rect x="36" y="110" width="48" height="10" rx="5" fill="#fff" opacity=".4"/>
+    </symbol>
+
+    <symbol id="cageGlossy" viewBox="0 0 200 150">
+      <rect x="70" y="8" width="60" height="16" rx="8" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".45" stroke-width="2"/>
+      <rect x="78" y="22" width="10" height="16" rx="4" fill="url(#sPart)"/>
+      <rect x="112" y="22" width="10" height="16" rx="4" fill="url(#sPart)"/>
+      <rect x="26" y="36" width="148" height="92" rx="20" fill="none" stroke="url(#sBody)" stroke-width="14"/>
+      <rect x="26" y="36" width="148" height="92" rx="20" fill="none" stroke="#d6217f" stroke-opacity=".45" stroke-width="2"/>
+      <rect x="33" y="43" width="134" height="78" rx="15" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="3"/>
+      <circle cx="42" cy="52" r="4" fill="#fff" opacity=".8"/><circle cx="158" cy="52" r="4" fill="#fff" opacity=".8"/>
+      <circle cx="42" cy="112" r="4" fill="#fff" opacity=".8"/><circle cx="158" cy="112" r="4" fill="#fff" opacity=".8"/>
+      <rect x="176" y="54" width="18" height="56" rx="9" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+    </symbol>
+
+    <symbol id="handleGlossy" viewBox="0 0 160 90">
+      <rect x="34" y="40" width="14" height="28" rx="6" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="112" y="40" width="14" height="28" rx="6" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="20" y="16" width="120" height="24" rx="12" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/>
+      <rect x="28" y="21" width="104" height="8" rx="4" fill="#fff" opacity=".55"/>
+      <circle cx="41" cy="72" r="5" fill="#fff" opacity=".8"/><circle cx="119" cy="72" r="5" fill="#fff" opacity=".8"/>
+    </symbol>
+
+    <symbol id="gripGlossy" viewBox="0 0 90 150">
+      <rect x="34" y="4" width="22" height="14" rx="6" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="24" y="16" width="42" height="122" rx="20" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/>
+      <rect x="30" y="22" width="10" height="110" rx="5" fill="#fff" opacity=".45"/>
+      <rect x="42" y="44" width="18" height="8" rx="4" fill="#8f1d5c" opacity=".2"/>
+      <rect x="42" y="68" width="18" height="8" rx="4" fill="#8f1d5c" opacity=".2"/>
+      <rect x="42" y="92" width="18" height="8" rx="4" fill="#8f1d5c" opacity=".2"/>
+    </symbol>
+
+    <symbol id="matteGlossy" viewBox="0 0 160 150">
+      <rect x="36" y="22" width="88" height="15" rx="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".45" stroke-width="2"/>
+      <rect x="116" y="50" width="15" height="58" rx="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".45" stroke-width="2"/>
+      <rect x="44" y="42" width="72" height="74" rx="13" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/>
+      <rect x="50" y="47" width="60" height="11" rx="5.5" fill="#fff" opacity=".5"/>
+      <circle cx="80" cy="82" r="26" fill="url(#sLens)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2"/>
+      <circle cx="80" cy="82" r="18" fill="url(#sGlass)"/>
+      <ellipse cx="72" cy="73" rx="6" ry="4" fill="#fff" opacity=".8" transform="rotate(-24 72 73)"/>
+      <rect x="20" y="126" width="120" height="9" rx="4.5" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="1.5"/>
+    </symbol>
+
+    <symbol id="ledGlossy" viewBox="0 0 160 110">
+      <path d="M42 80 V96 M118 80 V96" stroke="url(#sPart)" stroke-width="9" stroke-linecap="round"/>
+      <rect x="56" y="94" width="48" height="11" rx="5.5" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="16" y="14" width="128" height="66" rx="15" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/>
+      <rect x="22" y="19" width="116" height="10" rx="5" fill="#fff" opacity=".5"/>
+      <circle cx="38" cy="44" r="6" fill="#ffaa1f"/><circle cx="60" cy="44" r="6" fill="#ffd66b"/><circle cx="82" cy="44" r="6" fill="#0fae8d"/><circle cx="104" cy="44" r="6" fill="#3e63ff"/><circle cx="126" cy="44" r="6" fill="#ff2f92"/>
+      <circle cx="38" cy="63" r="6" fill="#ff2f92"/><circle cx="60" cy="63" r="6" fill="#3e63ff"/><circle cx="82" cy="63" r="6" fill="#ffd66b"/><circle cx="104" cy="63" r="6" fill="#0fae8d"/><circle cx="126" cy="63" r="6" fill="#ffaa1f"/>
+    </symbol>
+
+    <symbol id="sparkSym" viewBox="0 0 40 40">
+      <path d="M20 2 L24 16 L38 20 L24 24 L20 38 L16 24 L2 20 L16 16 Z" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="bg-mesh" aria-hidden="true"></div>
+<div class="bg-glow g1" aria-hidden="true"></div>
+<div class="bg-glow g2" aria-hidden="true"></div>
+<svg class="bg-cam" style="--rot:-14deg;width:190px;top:12%;left:4%;animation-duration:18s" aria-hidden="true"><use href="#camSym"/></svg>
+<svg class="bg-cam" style="--rot:11deg;width:130px;top:24%;right:6%;animation-duration:14s;animation-delay:-4s" aria-hidden="true"><use href="#camSym"/></svg>
+<svg class="bg-cam" style="--rot:-7deg;width:220px;bottom:14%;left:7%;animation-duration:21s;animation-delay:-8s" aria-hidden="true"><use href="#camSym"/></svg>
+<svg class="bg-cam" style="--rot:16deg;width:150px;bottom:22%;right:5%;animation-duration:16s;animation-delay:-2s" aria-hidden="true"><use href="#camSym"/></svg>
+<svg class="bg-cam" style="--rot:5deg;width:90px;top:52%;left:44%;animation-duration:12s;animation-delay:-6s;opacity:.35" aria-hidden="true"><use href="#camSym"/></svg>
+<span class="spark" style="top:20%;left:24%;font-size:20px" aria-hidden="true">✦</span>
+<span class="spark" style="top:36%;right:18%;font-size:14px;animation-delay:-3s" aria-hidden="true">✦</span>
+<span class="spark" style="bottom:30%;left:38%;font-size:16px;animation-delay:-6s" aria-hidden="true">✦</span>
+<span class="spark" style="top:64%;right:30%;font-size:12px;animation-delay:-8s" aria-hidden="true">✦</span>
+
+<nav class="nav" aria-label="Основная навигация">
+  <a class="nav-brand" href="#top"><span class="dot"></span>📷 PHOTO KIT 2026</a>
+  <div class="nav-links">
+    <a href="#builder" data-spy-link="builder" class="active">Конструктор</a>
+    <a href="#studio" data-spy-link="studio">Live-стенд</a>
+    <a href="#gallery" data-spy-link="gallery">Витрина</a>
+  </div>
+  <div class="nav-spacer"></div>
+  <button class="nav-btn" id="soundToggle" aria-pressed="true">🔊 ЗВУК</button>
+  <a class="nav-ghost" href="register.html">Регистрация</a>
+  <a class="nav-cta" href="login.html">ВОЙТИ</a>
+</nav>
+
+<div class="camera-hud" aria-hidden="true">
+  <div class="hud-corner top-left"></div><div class="hud-corner top-right"></div>
+  <div class="hud-corner bottom-left"></div><div class="hud-corner bottom-right"></div>
+  <div class="hud-bottom">
+    <span class="hud-chip">MASS: <span id="hudWeight">0 г</span></span>
+    <span class="hud-chip" id="hudStatus">[ ОЖИДАНИЕ СБОРКИ ]</span>
+    <span class="hud-chip" id="hudBudget">BUDGET: 0 $</span>
+  </div>
+</div>
+
+<div id="toast" role="status"></div>
+
+<main class="wrap" id="top">
+  <header class="hero reveal in">
+    <div class="hero-copy">
+      <span class="badge">✨ ГЛАВНАЯ СТУДИЯ • ИНТЕРАКТИВНЫЙ КОНСТРУКТОР</span>
+      <h1>Собери свой идеальный сетап</h1>
+      <p>Выбирайте тушку, оптику и обвес под свои предпочтения — схема рига, развесовка и бюджет пересчитываются вживую, а пошаговая инструкция соберётся сама.</p>
+      <div class="hero-stats">
+        <span class="stat-chip">5 ТУШЕК</span><span class="stat-chip">5 ОБЪЕКТИВОВ</span>
+        <span class="stat-chip">8 МОДУЛЕЙ ОБВЕСА</span><span class="stat-chip">5 ПРЕСЕТОВ</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <span class="art-shadow s1"></span><span class="art-shadow s2"></span><span class="art-shadow s3"></span>
+      <svg class="art main-cam" viewBox="0 0 220 160"><use href="#camGlossy"/></svg>
+      <svg class="art side-lens" viewBox="0 0 180 120"><use href="#lensGlossy"/></svg>
+      <svg class="art side-flash" viewBox="0 0 120 160"><use href="#flashGlossy"/></svg>
+      <span class="spark" style="top:6%;left:10%;font-size:22px">✦</span>
+      <span class="spark" style="top:34%;right:24%;font-size:14px;animation-delay:-3s">✦</span>
+      <span class="spark" style="bottom:12%;right:8%;font-size:18px;animation-delay:-5s">✦</span>
+      <span class="spark" style="bottom:34%;left:30%;font-size:12px;animation-delay:-7s">✦</span>
+    </div>
+  </header>
+
+  <div class="presets" role="group" aria-label="Пресеты под предпочтения">
+    <button class="preset-btn" data-preset="street">🚶‍♀️ Стрит-минимализм</button>
+    <button class="preset-btn" data-preset="event">📸 Репортаж / Свадьба</button>
+    <button class="preset-btn" data-preset="cinema">🎬 Кино-риг</button>
+    <button class="preset-btn" data-preset="travel">🎒 Тревел-лёгкий</button>
+    <button class="preset-btn" data-preset="vlog">🤳 Влог-сетап</button>
+    <button class="preset-btn reset" data-preset="clear">↺ Сбросить</button>
+  </div>
+
+  <div class="grid">
+    <section id="builder" data-spy="builder" aria-label="Компоненты кита">
+      <div class="card reveal">
+        <div class="card-art" aria-hidden="true">
+          <svg viewBox="0 0 400 110" preserveAspectRatio="xMidYMid meet">
+            <use href="#camGlossy" x="12" y="0" width="150" height="109"/>
+            <use href="#camGlossy" x="248" y="16" width="104" height="76" transform="rotate(7 300 54)"/>
+            <use href="#sparkSym" x="196" y="8" width="24" height="24" opacity=".9"/>
+            <use href="#sparkSym" x="362" y="66" width="16" height="16" opacity=".7"/>
+          </svg>
+        </div>
+        <div class="card-title"><h3>01. Тушка камеры</h3><span class="tag">База</span></div>
+        <select id="selectBody" class="kit-select" aria-label="Выбор камеры">
+          <option value="0|0|не выбрана">Выберите камеру...</option>
+          <option value="650|1900|Sony A7 IV">Sony A7 IV — 650 г • ~1 900 $</option>
+          <option value="715|3400|Sony A7S III">Sony A7S III — 715 г • ~3 400 $</option>
+          <option value="650|2200|Canon EOS R6 Mark II">Canon EOS R6 Mark II — 650 г • ~2 200 $</option>
+          <option value="550|1350|Fujifilm X-S20">Fujifilm X-S20 — 550 г • ~1 350 $</option>
+          <option value="910|3800|Nikon Z8">Nikon Z8 — 910 г • ~3 800 $</option>
+        </select>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-art" aria-hidden="true">
+          <svg viewBox="0 0 400 110" preserveAspectRatio="xMidYMid meet">
+            <use href="#lensGlossy" x="6" y="8" width="150" height="100"/>
+            <use href="#lensGlossy" x="168" y="26" width="112" height="75" transform="rotate(-6 224 63)"/>
+            <use href="#lensGlossy" x="296" y="34" width="86" height="57" transform="rotate(5 339 62)"/>
+            <use href="#sparkSym" x="150" y="4" width="20" height="20" opacity=".9"/>
+            <use href="#sparkSym" x="380" y="10" width="14" height="14" opacity=".7"/>
+          </svg>
+        </div>
+        <div class="card-title"><h3>02. Объектив</h3><span class="tag">Оптика</span></div>
+        <select id="selectLens" class="kit-select" aria-label="Выбор объектива">
+          <option value="0|0|не выбран" data-size="small">Выберите объектив...</option>
+          <option value="180|250|Фикс 35mm f/1.8" data-size="small">Фикс 35mm f/1.8 — 180 г • ~250 $</option>
+          <option value="280|450|Фикс 50mm f/1.8" data-size="small">Фикс 50mm f/1.8 — 280 г • ~450 $</option>
+          <option value="695|2100|Зум 24-70mm f/2.8" data-size="medium">Зум 24-70mm f/2.8 — 695 г • ~2 100 $</option>
+          <option value="1045|2400|Телевик 70-200mm f/2.8" data-size="large">Телевик 70-200mm f/2.8 — 1 045 г • ~2 400 $</option>
+          <option value="520|950|Кино-фикс 24mm T1.5" data-size="medium">Кино-фикс 24mm T1.5 — 520 г • ~950 $</option>
+        </select>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-art" aria-hidden="true">
+          <svg viewBox="0 0 400 110" preserveAspectRatio="xMidYMid meet">
+            <use href="#cageGlossy" x="8" y="0" width="148" height="111"/>
+            <use href="#matteGlossy" x="176" y="4" width="100" height="94"/>
+            <use href="#lensGlossy" x="292" y="30" width="96" height="64" transform="rotate(-5 340 62)"/>
+            <use href="#sparkSym" x="160" y="6" width="18" height="18" opacity=".9"/>
+            <use href="#sparkSym" x="382" y="14" width="14" height="14" opacity=".7"/>
+          </svg>
+        </div>
+        <div class="card-title"><h3>03. Обвес и защита</h3><span class="tag">Механика</span></div>
+        <div class="tiles">
+          <label class="tile"><input type="checkbox" class="rig-item" data-name="Клетка (Cage)" data-weight="120" data-price="80" data-part="cage"><span><span class="tile-name">Клетка (Cage)</span><span class="tile-meta">120 г • ~80 $</span></span><button type="button" class="info-dot" data-info="cage" aria-label="Справка: клетка">i</button></label>
+          <label class="tile"><input type="checkbox" class="rig-item" data-name="Верхняя ручка" data-weight="90" data-price="60" data-part="top-handle"><span><span class="tile-name">Верхняя ручка</span><span class="tile-meta">90 г • ~60 $</span></span><button type="button" class="info-dot" data-info="top-handle" aria-label="Справка: верхняя ручка">i</button></label>
+          <label class="tile"><input type="checkbox" class="rig-item" data-name="Боковая рукоятка" data-weight="110" data-price="50" data-part="side-handle"><span><span class="tile-name">Боковая рукоятка</span><span class="tile-meta">110 г • ~50 $</span></span><button type="button" class="info-dot" data-info="side-handle" aria-label="Справка: боковая рукоятка">i</button></label>
+          <label class="tile"><input type="checkbox" class="rig-item" data-name="Компендиум (Matte Box)" data-weight="350" data-price="150" data-part="mattebox"><span><span class="tile-name">Компендиум</span><span class="tile-meta">350 г • ~150 $</span></span><button type="button" class="info-dot" data-info="mattebox" aria-label="Справка: компендиум">i</button></label>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-art" aria-hidden="true">
+          <svg viewBox="0 0 400 110" preserveAspectRatio="xMidYMid meet">
+            <use href="#ledGlossy" x="0" y="14" width="112" height="77"/>
+            <use href="#flashGlossy" x="112" y="0" width="72" height="96"/>
+            <use href="#monitorGlossy" x="186" y="8" width="112" height="81"/>
+            <use href="#batteryGlossy" x="306" y="6" width="66" height="83"/>
+            <use href="#sparkSym" x="378" y="80" width="16" height="16" opacity=".8"/>
+          </svg>
+        </div>
+        <div class="card-title"><h3>04. Свет, экран и питание</h3><span class="tag">Электроника</span></div>
+        <div class="tiles">
+          <label class="tile"><input type="checkbox" class="rig-item" data-name="Мини RGB LED-свет" data-weight="150" data-price="40" data-part="led"><span><span class="tile-name">Мини RGB LED-свет</span><span class="tile-meta">150 г • ~40 $</span></span><button type="button" class="info-dot" data-info="led" aria-label="Справка: LED-свет">i</button></label>
+          <label class="tile"><input type="checkbox" class="rig-item" data-name="Вспышка TTL" data-weight="400" data-price="300" data-part="flash"><span><span class="tile-name">Вспышка TTL</span><span class="tile-meta">400 г • ~300 $</span></span><button type="button" class="info-dot" data-info="flash" aria-label="Справка: вспышка">i</button></label>
+          <label class="tile"><input type="checkbox" class="rig-item" data-name="Монитор 5&quot;" data-weight="200" data-price="250" data-part="monitor"><span><span class="tile-name">Монитор 5"</span><span class="tile-meta">200 г • ~250 $</span></span><button type="button" class="info-dot" data-info="monitor" aria-label="Справка: монитор">i</button></label>
+          <label class="tile"><input type="checkbox" class="rig-item" data-name="V-Mount батарея" data-weight="500" data-price="120" data-part="vmount"><span><span class="tile-name">V-Mount батарея</span><span class="tile-meta">500 г • ~120 $</span></span><button type="button" class="info-dot" data-info="vmount" aria-label="Справка: V-Mount">i</button></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="studio" data-spy="studio" aria-label="Схема и сводка">
+      <div class="card studio reveal">
+        <div class="card-title"><h3>🎀 LIVE BLUEPRINT</h3><span class="tag" id="presetTag">СВОЙ КИТ</span></div>
+
+        <div class="stage">
+          <span class="stage-label">RIG STUDIO 2026 • VIEWFINDER</span>
+          <svg id="bpSvg" viewBox="0 0 520 300" class="grid labels" role="img" aria-label="Схема собранного рига">
+            <defs>
+              <pattern id="gridPat" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M20 0H0V20" fill="none" stroke="rgba(143,29,92,.14)" stroke-width="1"/>
+              </pattern>
+              <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffe3f1"/><stop offset=".45" stop-color="#ff8fc0"/><stop offset="1" stop-color="#e0338f"/>
+              </linearGradient>
+              <linearGradient id="gLens" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffd6ea"/><stop offset=".5" stop-color="#ff9cc9"/><stop offset="1" stop-color="#d6217f"/>
+              </linearGradient>
+              <linearGradient id="gPart" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#fff0f7"/><stop offset="1" stop-color="#ff77b9"/>
+              </linearGradient>
+              <linearGradient id="gScreen" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#3e63ff"/><stop offset=".55" stop-color="#b06bff"/><stop offset="1" stop-color="#ff4fa0"/>
+              </linearGradient>
+              <radialGradient id="gGlass" cx=".35" cy=".3" r=".95">
+                <stop offset="0" stop-color="#c4589a"/><stop offset=".6" stop-color="#8f1d5c"/><stop offset="1" stop-color="#4a0e33"/>
+              </radialGradient>
+              <filter id="rigShadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#d6217f" flood-opacity=".28"/>
+              </filter>
+            </defs>
+            <rect class="gridlayer" x="0" y="0" width="520" height="300" fill="url(#gridPat)"/>
+            <path d="M260 12v14M260 274v14M12 150h14M494 150h14" stroke="rgba(214,33,127,.4)" stroke-width="2"/>
+            <g filter="url(#rigShadow)">
+              <g id="gVmount" class="bp" role="button" aria-label="Справка: V-Mount батарея">
+                <rect class="hit" x="146" y="124" width="30" height="72" fill="#fff" fill-opacity="0" pointer-events="all"/>
+                <rect x="148" y="126" width="26" height="68" rx="7" fill="url(#gPart)" stroke="#d6217f" stroke-width="2"/>
+                <circle cx="161" cy="138" r="4" fill="#0fae8d"/>
+                <text class="bp-label" x="161" y="212" text-anchor="middle">V-MOUNT</text>
+              </g>
+              <g id="gSide" class="bp" role="button" aria-label="Справка: боковая рукоятка">
+                <rect class="hit" x="180" y="130" width="24" height="60" fill="#fff" fill-opacity="0" pointer-events="all"/>
+                <rect x="182" y="132" width="20" height="56" rx="9" fill="url(#gPart)" stroke="#d6217f" stroke-width="2"/>
+                <text class="bp-label" x="192" y="212" text-anchor="middle">GRIP</text>
+              </g>
+              <g id="gCage" class="bp" role="button" aria-label="Справка: клетка">
+                <rect class="hit" x="200" y="106" width="140" height="106" fill="#fff" fill-opacity="0" pointer-events="all"/>
+                <rect x="202" y="108" width="136" height="102" rx="16" fill="none" stroke="#d6217f" stroke-width="2.5" stroke-dasharray="7 6"/>
+                <text class="bp-label" x="270" y="232" text-anchor="middle">CAGE</text>
+              </g>
+              <g id="gBody" class="bp" role="button" aria-label="Справка: тушка камеры">
+                <rect class="hit" x="208" y="96" width="124" height="108" fill="#fff" fill-opacity="0" pointer-events="all"/>
+                <rect x="246" y="98" width="48" height="26" rx="9" fill="url(#gBody)" stroke="#d6217f" stroke-width="2"/>
+                <rect x="210" y="118" width="120" height="84" rx="15" fill="url(#gBody)" stroke="#d6217f" stroke-width="2.5"/>
+                <rect x="216" y="124" width="108" height="14" rx="7" fill="#fff" opacity=".5"/>
+                <rect x="312" y="126" width="18" height="68" rx="8" fill="url(#gPart)" stroke="#d6217f" stroke-width="2"/>
+                <circle cx="320" cy="112" r="5" fill="#fff" stroke="#d6217f" stroke-width="1.5"/>
+                <text class="bp-label" x="262" y="222" text-anchor="middle">CAMERA</text>
+              </g>
+              <g id="gTop" class="bp" role="button" aria-label="Справка: верхняя ручка">
+                <rect class="hit" x="230" y="74" width="80" height="36" fill="#fff" fill-opacity="0" pointer-events="all"/>
+                <rect x="240" y="90" width="8" height="18" rx="3" fill="url(#gPart)" stroke="#d6217f" stroke-width="1.5"/>
+                <rect x="292" y="90" width="8" height="18" rx="3" fill="url(#gPart)" stroke="#d6217f" stroke-width="1.5"/>
+                <rect x="232" y="76" width="76" height="15" rx="7.5" fill="url(#gPart)" stroke="#d6217f" stroke-width="2"/>
+                <text class="bp-label" x="270" y="68" text-anchor="middle">TOP HANDLE</text>
+              </g>
+              <g id="gMon" class="bp" role="button" aria-label="Справка: монитор">
+                <rect class="hit" x="138" y="58" width="70" height="46" fill="#fff" fill-opacity="0" pointer-events="all"/>
+                <path d="M214 118 L198 100" stroke="#d6217f" stroke-width="3" stroke-linecap="round"/>
+                <rect x="140" y="60" width="66" height="42" rx="8" fill="url(#gPart)" stroke="#d6217f" stroke-width="2"/>
+                <rect x="146" y="66" width="54" height="30" rx="5" fill="url(#gScreen)"/>
+                <ellipse cx="158" cy="72" rx="12" ry="5" fill="#fff" opacity=".4"/>
+                <text class="bp-label" x="173" y="52" text-anchor="middle">5" MON</text>
+              </g>
+              <g id="gLight" class="bp" role="button" aria-label="Справка: свет">
+                <rect class="hit" x="298" y="64" width="50" height="32" fill="#fff" fill-opacity="0" pointer-events="all"/>
+                <rect x="300" y="66" width="46" height="28" rx="7" fill="url(#gPart)" stroke="#d6217f" stroke-width="2"/>
+                <circle cx="312" cy="80" r="4" fill="#ffaa1f"/><circle cx="323" cy="80" r="4" fill="#ffd66b"/><circle cx="334" cy="80" r="4" fill="#ffaa1f"/>
+                <text class="bp-label" x="323" y="58" text-anchor="middle" id="lightLabel">LED</text>
+              </g>
+              <g id="gLensG" class="bp" role="button" aria-label="Справка: объектив">
+                <rect class="hit" id="lensHit" x="330" y="132" width="148" height="60" fill="#fff" fill-opacity="0" pointer-events="all"/>
+                <rect id="lensBarrel" x="332" y="136" width="68" height="52" rx="11" fill="url(#gLens)" stroke="#d6217f" stroke-width="2.5"/>
+                <rect id="lensRing" x="352" y="136" width="9" height="52" fill="#fff" opacity=".35"/>
+                <g id="gFront">
+                  <ellipse cx="402" cy="162" rx="9" ry="27" fill="url(#gLens)" stroke="#d6217f" stroke-width="2"/>
+                  <ellipse cx="404" cy="162" rx="5" ry="20" fill="url(#gGlass)"/>
+                  <ellipse cx="402" cy="152" rx="2.5" ry="6" fill="#fff" opacity=".7"/>
+                  <g id="gMatte" class="bp" role="button" aria-label="Справка: компендиум">
+                    <rect class="hit" x="406" y="116" width="40" height="84" fill="#fff" fill-opacity="0" pointer-events="all"/>
+                    <rect x="412" y="128" width="26" height="68" rx="7" fill="url(#gPart)" stroke="#d6217f" stroke-width="2"/>
+                    <rect x="408" y="118" width="34" height="9" rx="4" fill="url(#gPart)" stroke="#d6217f" stroke-width="1.5"/>
+                    <text class="bp-label" x="425" y="212" text-anchor="middle">MATTE BOX</text>
+                  </g>
+                </g>
+                <text class="bp-label" x="366" y="212" text-anchor="middle">LENS</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <p class="stage-hint">👆 Нажмите на модуль на схеме (или на «i» у карточки) — откроется справка с брендами и ценами</p>
+
+        <div class="controls" aria-label="Тонкая настройка стенда">
+          <div class="ctl">
+            <div class="ctl-head"><span>ЛИМИТ БЮДЖЕТА</span><output id="limitOut">6 000 $</output></div>
+            <input type="range" id="limitRange" min="1000" max="10000" step="100" value="6000" aria-label="Лимит бюджета">
+          </div>
+          <div class="ctl">
+            <div class="ctl-head"><span>МАСШТАБ СХЕМЫ</span><output id="zoomOut">100%</output></div>
+            <input type="range" id="zoomRange" min="70" max="150" step="5" value="100" aria-label="Масштаб схемы">
+          </div>
+          <div class="ctl-toggles">
+            <label class="switch"><span>СЕТКА</span><input type="checkbox" id="gridToggle" checked><span class="sw-track"></span></label>
+            <label class="switch"><span>ПОДПИСИ</span><input type="checkbox" id="labelToggle" checked><span class="sw-track"></span></label>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric" id="mWeight"><span class="metric-label">Общая масса</span><span class="metric-value" id="totalWeight">0 г</span></div>
+          <div class="metric" id="mPrice"><span class="metric-label">Бюджет кита</span><span class="metric-value price" id="totalPrice">0 $</span></div>
+        </div>
+
+        <div class="meter">
+          <div class="meter-head"><span>НАГРУЗКА С РУК</span><span id="weightAdvice">Не выбрано</span></div>
+          <div class="meter-bar"><div class="meter-fill" id="loadBar"></div></div>
+        </div>
+        <div class="meter">
+          <div class="meter-head"><span>ОСВОЕНО БЮДЖЕТА</span><span id="budgetAdvice">0 / 6 000 $</span></div>
+          <div class="meter-bar"><div class="meter-fill good" id="budgetBar"></div></div>
+        </div>
+
+        <div class="guide-head"><h3>📋 Инструкция сборки</h3><span class="guide-progress" id="guideProgress">0 / 0</span></div>
+        <ul class="steps" id="steps">
+          <li class="empty-step">Выберите камеру и объектив слева — инструкция соберётся сама ✨</li>
+        </ul>
+
+        <div class="actions">
+          <button class="btn btn-candy" id="copyBtn">📋 СКОПИРОВАТЬ СПЕЦИФИКАЦИЮ</button>
+          <button class="btn btn-ghost" id="downloadBtn">⬇ СКАЧАТЬ .TXT</button>
+          <button class="btn btn-ghost" id="randomBtn">🎲 СЛУЧАЙНЫЙ КИТ</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="gallery" data-spy="gallery" aria-label="Витрина обвеса">
+    <div class="gallery-head reveal">
+      <div>
+        <h2>Витрина обвеса ✦</h2>
+        <p>Те же глянцевые модули, что и на фоне — клик по стикеру добавляет его в кит, а «i» открывает справку.</p>
+      </div>
+      <span class="stat-chip">8 МОДУЛЕЙ • КЛИК = В КИТ</span>
+    </div>
+    <div class="stickers reveal">
+      <div class="sticker-wrap">
+        <button type="button" class="sticker" data-part="cage" aria-pressed="false">
+          <span class="sticker-art"><svg viewBox="0 0 200 150" aria-hidden="true"><use href="#cageGlossy"/></svg><span class="sticker-shadow"></span><span class="sticker-spark">✦</span></span>
+          <span class="sticker-name">Клетка (Cage)</span><span class="sticker-meta">120 г • ~80 $</span>
+          <span class="sticker-state">＋ добавить</span>
+        </button>
+        <button type="button" class="info-dot" data-info="cage" aria-label="Справка: клетка">i</button>
+      </div>
+      <div class="sticker-wrap">
+        <button type="button" class="sticker" data-part="top-handle" aria-pressed="false">
+          <span class="sticker-art"><svg viewBox="0 0 160 90" aria-hidden="true"><use href="#handleGlossy"/></svg><span class="sticker-shadow"></span><span class="sticker-spark">✦</span></span>
+          <span class="sticker-name">Верхняя ручка</span><span class="sticker-meta">90 г • ~60 $</span>
+          <span class="sticker-state">＋ добавить</span>
+        </button>
+        <button type="button" class="info-dot" data-info="top-handle" aria-label="Справка: верхняя ручка">i</button>
+      </div>
+      <div class="sticker-wrap">
+        <button type="button" class="sticker" data-part="side-handle" aria-pressed="false">
+          <span class="sticker-art"><svg viewBox="0 0 90 150" aria-hidden="true"><use href="#gripGlossy"/></svg><span class="sticker-shadow"></span><span class="sticker-spark">✦</span></span>
+          <span class="sticker-name">Боковая рукоятка</span><span class="sticker-meta">110 г • ~50 $</span>
+          <span class="sticker-state">＋ добавить</span>
+        </button>
+        <button type="button" class="info-dot" data-info="side-handle" aria-label="Справка: боковая рукоятка">i</button>
+      </div>
+      <div class="sticker-wrap">
+        <button type="button" class="sticker" data-part="mattebox" aria-pressed="false">
+          <span class="sticker-art"><svg viewBox="0 0 160 150" aria-hidden="true"><use href="#matteGlossy"/></svg><span class="sticker-shadow"></span><span class="sticker-spark">✦</span></span>
+          <span class="sticker-name">Компендиум</span><span class="sticker-meta">350 г • ~150 $</span>
+          <span class="sticker-state">＋ добавить</span>
+        </button>
+        <button type="button" class="info-dot" data-info="mattebox" aria-label="Справка: компендиум">i</button>
+      </div>
+      <div class="sticker-wrap">
+        <button type="button" class="sticker" data-part="led" aria-pressed="false">
+          <span class="sticker-art"><svg viewBox="0 0 160 110" aria-hidden="true"><use href="#ledGlossy"/></svg><span class="sticker-shadow"></span><span class="sticker-spark">✦</span></span>
+          <span class="sticker-name">Мини RGB LED-свет</span><span class="sticker-meta">150 г • ~40 $</span>
+          <span class="sticker-state">＋ добавить</span>
+        </button>
+        <button type="button" class="info-dot" data-info="led" aria-label="Справка: LED-свет">i</button>
+      </div>
+      <div class="sticker-wrap">
+        <button type="button" class="sticker" data-part="flash" aria-pressed="false">
+          <span class="sticker-art"><svg viewBox="0 0 120 160" aria-hidden="true"><use href="#flashGlossy"/></svg><span class="sticker-shadow"></span><span class="sticker-spark">✦</span></span>
+          <span class="sticker-name">Вспышка TTL</span><span class="sticker-meta">400 г • ~300 $</span>
+          <span class="sticker-state">＋ добавить</span>
+        </button>
+        <button type="button" class="info-dot" data-info="flash" aria-label="Справка: вспышка">i</button>
+      </div>
+      <div class="sticker-wrap">
+        <button type="button" class="sticker" data-part="monitor" aria-pressed="false">
+          <span class="sticker-art"><svg viewBox="0 0 180 130" aria-hidden="true"><use href="#monitorGlossy"/></svg><span class="sticker-shadow"></span><span class="sticker-spark">✦</span></span>
+          <span class="sticker-name">Монитор 5"</span><span class="sticker-meta">200 г • ~250 $</span>
+          <span class="sticker-state">＋ добавить</span>
+        </button>
+        <button type="button" class="info-dot" data-info="monitor" aria-label="Справка: монитор">i</button>
+      </div>
+      <div class="sticker-wrap">
+        <button type="button" class="sticker" data-part="vmount" aria-pressed="false">
+          <span class="sticker-art"><svg viewBox="0 0 120 150" aria-hidden="true"><use href="#batteryGlossy"/></svg><span class="sticker-shadow"></span><span class="sticker-spark">✦</span></span>
+          <span class="sticker-name">V-Mount батарея</span><span class="sticker-meta">500 г • ~120 $</span>
+          <span class="sticker-state">＋ добавить</span>
+        </button>
+        <button type="button" class="info-dot" data-info="vmount" aria-label="Справка: V-Mount">i</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="filmstrip reveal" aria-hidden="true">
+    <span class="frame"><svg viewBox="0 0 220 160"><use href="#camGlossy"/></svg></span>
+    <span class="frame"><svg viewBox="0 0 180 120"><use href="#lensGlossy"/></svg></span>
+    <span class="frame"><svg viewBox="0 0 220 160"><use href="#camGlossy"/></svg></span>
+    <span class="frame"><svg viewBox="0 0 120 160"><use href="#flashGlossy"/></svg></span>
+    <span class="frame"><svg viewBox="0 0 220 160"><use href="#camGlossy"/></svg></span>
+    <span class="frame"><svg viewBox="0 0 160 110"><use href="#ledGlossy"/></svg></span>
+    <span class="frame"><svg viewBox="0 0 220 160"><use href="#camGlossy"/></svg></span>
+  </div>
+</main>
+
+<footer>
+  PHOTO KIT 2026 • СОБРАНО С ЛЮБОВЬЮ К РОЗОВОМУ ГЛЯНЦУ • <a href="login.html">ВХОД</a> • <a href="register.html">РЕГИСТРАЦИЯ</a>
+</footer>
+
+<!-- ======= МОДАЛКА МОДУЛЯ ======= -->
+<div class="modal-scrim" id="modalScrim" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Закрыть справку">✕</button>
+    <div class="modal-art" aria-hidden="true">
+      <span class="modal-art-tag" id="modalArtTag">МЕХАНИКА</span>
+      <span class="modal-art-shadow"></span>
+      <svg id="modalArt" viewBox="0 0 220 160"><use id="modalArtUse" href="#camGlossy"/></svg>
+      <span class="spark" style="top:14%;left:12%;font-size:20px">✦</span>
+      <span class="spark" style="top:30%;right:14%;font-size:13px;animation-delay:-3s">✦</span>
+      <span class="spark" style="bottom:20%;left:24%;font-size:15px;animation-delay:-6s">✦</span>
+    </div>
+    <div class="modal-body">
+      <span class="tag" id="modalTag">МОДУЛЬ</span>
+      <h3 id="modalTitle">—</h3>
+      <p id="modalDesc">—</p>
+      <div class="modal-chips" id="modalChips"></div>
+      <div class="modal-specs" id="modalSpecs"></div>
+      <h4>ПРИМЕРЫ У ИЗВЕСТНЫХ БРЕНДОВ</h4>
+      <ul class="brand-list" id="brandList"></ul>
+      <div class="modal-actions">
+        <button class="btn btn-candy" id="modalToggle">＋ ДОБАВИТЬ В КИТ</button>
+        <button class="btn btn-ghost" id="modalDismiss">ПОНЯТНО</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const $ = id => document.getElementById(id);
+  const bodySel = $('selectBody'), lensSel = $('selectLens');
+  const tiles = Array.from(document.querySelectorAll('.rig-item'));
+  const stickers = Array.from(document.querySelectorAll('.sticker'));
+  const svg = $('bpSvg');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- звук ---------- */
+  let audioCtx = null, soundOn = true;
+  const soundBtn = $('soundToggle');
+  function burst(t, dur, freq, gain) {
+    const buf = audioCtx.createBuffer(1, Math.floor(audioCtx.sampleRate * dur), audioCtx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 2);
+    const src = audioCtx.createBufferSource(); src.buffer = buf;
+    const f = audioCtx.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = freq;
+    const g = audioCtx.createGain();
+    g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+    src.connect(f); f.connect(g); g.connect(audioCtx.destination); src.start(t);
+  }
+  function tick() {
+    if (!soundOn) return;
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      burst(audioCtx.currentTime, .04, 2400, .12);
+    } catch (e) {}
+  }
+  function shutter() {
+    if (!soundOn) return;
+    try {
+      audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const t = audioCtx.currentTime;
+      burst(t, .07, 1400, .4); burst(t + .09, .09, 900, .3);
+    } catch (e) {}
+  }
+  soundBtn.addEventListener('click', () => {
+    soundOn = !soundOn;
+    soundBtn.textContent = soundOn ? '🔊 ЗВУК' : '🔇 ТИХО';
+    soundBtn.setAttribute('aria-pressed', String(soundOn));
+    if (soundOn) tick();
+  });
+
+  /* ---------- toast ---------- */
+  const toast = $('toast'); let toastTimer = 0;
+  function say(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  /* ---------- справочник модулей ---------- */
+  const MODULES = {
+    'body': { type:'body', tag:'БАЗА', art:'camGlossy', vb:'0 0 220 160', title:'Тушка камеры (Body)',
+      desc:'Сердце кита: матрица, процессор и байонет. От неё зависят качество картинки, автофокус и то, какие объективы и обвес вообще подойдут к сборке.',
+      benefits:['Матрица и стабилизация','Байонет под оптику','Автофокус и видео'],
+      brands:[{b:'Sony',m:'A7 IV • 33 Мп, 4K60',p:1900,idx:1},{b:'Canon',m:'EOS R6 Mark II • 24 Мп',p:2200,idx:3},{b:'Nikon',m:'Z8 • 45 Мп, 8K',p:3800,idx:5}] },
+    'lens': { type:'lens', tag:'ОПТИКА', art:'lensGlossy', vb:'0 0 180 120', title:'Объектив (Optics)',
+      desc:'Рисует картинку: фокусное расстояние решает, что влезет в кадр, а светосила — насколько чисто будет в темноте и мягким получится фон.',
+      benefits:['Фокусное и угол','Светосила f/1.8–2.8','Боке и резкость'],
+      brands:[{b:'Sony',m:'FE 35mm f/1.8 • стрит-фикс',p:450,idx:1},{b:'Sigma',m:'24-70mm f/2.8 Art • репортаж',p:1100,idx:3},{b:'Canon',m:'RF 70-200mm f/2.8 • телевик',p:2400,idx:4}] },
+    'cage': { type:'toggle', tag:'МЕХАНИКА', art:'cageGlossy', vb:'0 0 200 150', title:'Клетка (Cage)',
+      desc:'Алюминиевая рама вокруг тушки: защищает корпус и даёт резьбы 1/4" и 3/8" под ручки, монитор и свет — без неё обвес крепить некуда.',
+      benefits:['Защита корпуса','Резьбы под обвес','Холодный башмак'],
+      brands:[{b:'SmallRig',m:'3667 • под A7 IV',p:80},{b:'Tilta',m:'TA-T01 • full cage',p:150},{b:'Nitze',m:'N07 • лёгкая рама',p:90}] },
+    'top-handle': { type:'toggle', tag:'МЕХАНИКА', art:'handleGlossy', vb:'0 0 160 90', title:'Верхняя ручка',
+      desc:'Низкие ракурсы и плавные проводки без боли в запястье: ручка переносит вес рига на кисть сверху и даёт точки крепления аксессуаров.',
+      benefits:['Низкие ракурсы','Плавные проводки','Точки крепления'],
+      brands:[{b:'SmallRig',m:'3765 • nato-ручка',p:40},{b:'Tilta',m:'TH-01 • с розеткой',p:70},{b:'Wooden Camera',m:'WC-203 • премиум',p:120}] },
+    'side-handle': { type:'toggle', tag:'МЕХАНИКА', art:'gripGlossy', vb:'0 0 90 150', title:'Боковая рукоятка',
+      desc:'Вторая точка хвата для съёмки с рук: гасит дрожь, помогает вести камеру за действием и снимает нагрузку с одной руки на длинной смене.',
+      benefits:['Стабильный хват','Меньше дрожи','Баланс двух рук'],
+      brands:[{b:'SmallRig',m:'3260 • деревянная',p:50},{b:'Shape',m:'SG-01 • эргономика',p:110},{b:'Tilta',m:'TG-01 • розетка ARRI',p:90}] },
+    'mattebox': { type:'toggle', tag:'МЕХАНИКА', art:'matteGlossy', vb:'0 0 160 150', title:'Компендиум (Matte Box)',
+      desc:'Козырёк перед объективом: отсекает паразитный свет от бликов и держит ND/поляризационные фильтры 4×5.65 — без них кино-картинка не управляема.',
+      benefits:['Защита от бликов','ND-фильтры 4×5.65','Флаги сверху и сбоку'],
+      brands:[{b:'SmallRig',m:'4×5.65 • 2 стадии',p:150},{b:'Tilta',m:'MB-T03 • карбон',p:300},{b:'Bright Tangerine',m:'Misfit • кино-стандарт',p:600}] },
+    'led': { type:'toggle', tag:'СВЕТ', art:'ledGlossy', vb:'0 0 160 110', title:'Мини RGB LED-свет',
+      desc:'Карманный постоянный свет: подсветить лицо в сумерках, дать цветной акцент или рисующий свет для предметки. Крепится на башмак клетки.',
+      benefits:['RGB-цвет и CCT','Карманный размер','Крепление на башмак'],
+      brands:[{b:'Aputure',m:'MC • 4 Вт, RGB',p:90},{b:'Godox',m:'M1 • 5 Вт',p:80},{b:'Nanlite',m:'LitoLite 5C • магнит',p:60}] },
+    'flash': { type:'toggle', tag:'СВЕТ', art:'flashGlossy', vb:'0 0 120 160', title:'Вспышка TTL',
+      desc:'Импульсный свет для репортажа и свадьбы: замораживает движение и вытягивает тёмные залы, где матрица уже шумит на высоких ISO.',
+      benefits:['TTL-автоматика','Заморозка движения','Синхронизация по шторке'],
+      brands:[{b:'Godox',m:'V1 • круглая голова',p:260},{b:'Profoto',m:'A10 • студийный цвет',p:1000},{b:'Yongnuo',m:'YN560 IV • бюджет',p:70}] },
+    'monitor': { type:'toggle', tag:'ЭКРАН', art:'monitorGlossy', vb:'0 0 180 130', title:'Монитор 5"',
+      desc:'Внешний экран ярче встроенного: видно фокус и экспозицию на солнце, плюс фокус-пикинг, зебра и запись ProRes у моделей-рекордеров.',
+      benefits:['Яркость 1000+ нит','Фокус-пикинг и зебра','Запись ProRes'],
+      brands:[{b:'Atomos',m:'Ninja V • рекордер',p:400},{b:'Feelworld',m:'F6 Plus • 5.5"',p:160},{b:'Portkeys',m:'BM5 III • управление',p:300}] },
+    'vmount': { type:'toggle', tag:'ПИТАНИЕ', art:'batteryGlossy', vb:'0 0 120 150', title:'V-Mount батарея',
+      desc:'Большая батарея на плите V-Mount: питает камеру, монитор и свет одновременно часами, а не минутами — сердце долгой съёмочной смены.',
+      benefits:['99+ Вт·ч ёмкость','D-Tap и USB выходы','Плита на клетку'],
+      brands:[{b:'SmallRig',m:'VB99 • 99 Вт·ч',p:200},{b:'Bebop',m:'V98 • кино-плита',p:350},{b:'Anton Bauer',m:'Titon 90 • стандарт',p:450}] }
+  };
+
+  /* ---------- модалка ---------- */
+  const scrim = $('modalScrim'), modal = $('modal');
+  const mArt = $('modalArt'), mArtUse = $('modalArtUse'), mArtTag = $('modalArtTag');
+  const mTag = $('modalTag'), mTitle = $('modalTitle'), mDesc = $('modalDesc');
+  const mChips = $('modalChips'), mSpecs = $('modalSpecs'), mBrands = $('brandList');
+  const mToggle = $('modalToggle'), mDismiss = $('modalDismiss'), mClose = $('modalClose');
+  let modalKey = null, lastFocus = null, prevOverflow = '';
+
+  function tileFor(key) { return tiles.find(t => t.dataset.part === key); }
+
+  function renderModal(key) {
+    const d = MODULES[key];
+    if (!d) return;
+    modalKey = key;
+    mArt.setAttribute('viewBox', d.vb);
+    mArtUse.setAttribute('href', '#' + d.art);
+    mArtTag.textContent = d.tag;
+    mTag.textContent = d.tag;
+    mTitle.textContent = d.title;
+    mDesc.textContent = d.desc;
+    mChips.innerHTML = d.benefits.map(b => '<span class="chip-benefit">✦ ' + b + '</span>').join('');
+
+    mSpecs.innerHTML = '';
+    if (d.type === 'toggle') {
+      const t = tileFor(key);
+      mSpecs.innerHTML =
+        '<span class="spec-chip w">⚖️ ' + t.dataset.weight + ' г</span>' +
+        '<span class="spec-chip p">💰 ~' + (+t.dataset.price).toLocaleString('ru-RU') + ' $ в ките</span>' +
+        (t.checked ? '<span class="spec-chip s">✓ уже в ките</span>' : '');
+    } else {
+      const sel = d.type === 'body' ? bodySel : lensSel;
+      const cur = sel.value.split('|')[2];
+      mSpecs.innerHTML = '<span class="spec-chip s">в ките: ' + cur + '</span>';
+    }
+
+    mBrands.innerHTML = '';
+    d.brands.forEach(br => {
+      const li = document.createElement('li');
+      li.innerHTML =
+        '<span class="brand-badge">' + br.b.charAt(0) + '</span>' +
+        '<span><span class="brand-name">' + br.b + '</span><span class="brand-model">' + br.m + '</span></span>' +
+        '<span class="brand-price">~' + br.p.toLocaleString('ru-RU') + ' $</span>';
+      if (d.type !== 'toggle') {
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'brand-choose'; btn.textContent = 'ВЫБРАТЬ';
+        btn.addEventListener('click', () => {
+          const sel = d.type === 'body' ? bodySel : lensSel;
+          sel.selectedIndex = br.idx;
+          setActivePreset(null);
+          recalculate(); tick();
+          say('Выбрано: ' + br.b + ' ' + br.m.split('•')[0].trim() + ' ✨');
+          closeModal();
+        });
+        li.appendChild(btn);
+      }
+      mBrands.appendChild(li);
+    });
+
+    if (d.type === 'toggle') {
+      mToggle.style.display = '';
+      refreshToggleBtn();
+    } else {
+      mToggle.style.display = 'none';
+    }
+  }
+  function refreshToggleBtn() {
+    const t = tileFor(modalKey);
+    const on = t && t.checked;
+    mToggle.textContent = on ? '✓ УБРАТЬ ИЗ КИТА' : '＋ ДОБАВИТЬ В КИТ';
+    mToggle.classList.toggle('remove', !!on);
+  }
+  function openModal(key, trigger) {
+    if (!MODULES[key]) return;
+    lastFocus = trigger || document.activeElement;
+    renderModal(key);
+    prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    scrim.hidden = false;
+    mClose.focus();
+    tick();
+  }
+  function closeModal() {
+    if (scrim.hidden) return;
+    scrim.hidden = true;
+    document.body.style.overflow = prevOverflow;
+    modalKey = null;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  mClose.addEventListener('click', closeModal);
+  mDismiss.addEventListener('click', closeModal);
+  scrim.addEventListener('click', e => { if (e.target === scrim) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (scrim.hidden) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Tab') {
+      const f = Array.from(modal.querySelectorAll('button, [href], input, select, [tabindex]:not([tabindex="-1"])')).filter(el => el.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  mToggle.addEventListener('click', () => {
+    const t = tileFor(modalKey);
+    if (!t) return;
+    t.checked = !t.checked;
+    setActivePreset(null);
+    recalculate();
+    renderModal(modalKey);
+    tick();
+    say(t.checked ? '✦ ' + t.dataset.name + ' — в ките!' : 'Модуль убран с рига');
+  });
+
+  /* ---------- триггеры справки ---------- */
+  document.querySelectorAll('.info-dot').forEach(b => b.addEventListener('click', e => {
+    e.preventDefault(); e.stopPropagation();
+    openModal(b.dataset.info, b);
+  }));
+  const BP_MAP = { gBody:'body', gLensG:'lens', gCage:'cage', gTop:'top-handle', gSide:'side-handle', gMatte:'mattebox', gMon:'monitor', gVmount:'vmount' };
+  Object.keys(BP_MAP).forEach(id => {
+    const g = $(id);
+    g.addEventListener('click', e => { e.stopPropagation(); openModal(BP_MAP[id], g); });
+    g.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); openModal(BP_MAP[id], g); }
+    });
+  });
+  $('gLight').addEventListener('click', e => {
+    e.stopPropagation();
+    const flashOn = tileFor('flash').checked, ledOn = tileFor('led').checked;
+    openModal(flashOn ? 'flash' : (ledOn ? 'led' : 'led'), $('gLight'));
+  });
+  $('gLight').addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); openModal(tileFor('flash').checked ? 'flash' : 'led', $('gLight')); }
+  });
+
+  /* ---------- пресеты ---------- */
+  const PRESETS = {
+    street: { body: 4, lens: 1, parts: ['led'], label: 'СТРИТ' },
+    event:  { body: 1, lens: 3, parts: ['flash'], label: 'РЕПОРТАЖ' },
+    cinema: { body: 2, lens: 5, parts: ['cage','top-handle','mattebox','monitor','vmount'], label: 'КИНО-РИГ' },
+    travel: { body: 4, lens: 2, parts: ['side-handle'], label: 'ТРЕВЕЛ' },
+    vlog:   { body: 3, lens: 3, parts: ['top-handle','led','monitor'], label: 'ВЛОГ' }
+  };
+  let applyingPreset = false;
+  const presetTag = $('presetTag');
+  function setActivePreset(key) {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.toggle('active', b.dataset.preset === key));
+    presetTag.textContent = key && PRESETS[key] ? PRESETS[key].label : 'СВОЙ КИТ';
+  }
+  function applyPreset(key) {
+    applyingPreset = true;
+    bodySel.selectedIndex = 0; lensSel.selectedIndex = 0;
+    tiles.forEach(t => t.checked = false);
+    if (PRESETS[key]) {
+      const p = PRESETS[key];
+      bodySel.selectedIndex = p.body; lensSel.selectedIndex = p.lens;
+      tiles.forEach(t => { if (p.parts.includes(t.dataset.part)) t.checked = true; });
+      setActivePreset(key);
+      say('Пресет применён: ' + p.label + ' ✨');
+    } else {
+      setActivePreset(null);
+      say('Стенд очищен ↺');
+    }
+    applyingPreset = false;
+    recalculate();
+    tick();
+  }
+  document.querySelectorAll('.preset-btn').forEach(b => b.addEventListener('click', () => applyPreset(b.dataset.preset)));
+
+  $('randomBtn').addEventListener('click', () => {
+    applyingPreset = true;
+    bodySel.selectedIndex = 1 + Math.floor(Math.random() * (bodySel.options.length - 1));
+    lensSel.selectedIndex = 1 + Math.floor(Math.random() * (lensSel.options.length - 1));
+    tiles.forEach(t => t.checked = Math.random() < .38);
+    setActivePreset(null);
+    applyingPreset = false;
+    recalculate();
+    shutter();
+    say('🎲 Случайный кит собран — посмотрите на стенд!');
+  });
+
+  stickers.forEach(st => st.addEventListener('click', () => {
+    const tile = tileFor(st.dataset.part);
+    if (!tile) return;
+    tile.checked = !tile.checked;
+    if (!applyingPreset) setActivePreset(null);
+    recalculate();
+    tick();
+    say(tile.checked ? '✦ ' + tile.dataset.name + ' — в ките!' : 'Модуль убран с рига');
+  }));
+  function syncStickers() {
+    stickers.forEach(st => {
+      const tile = tileFor(st.dataset.part);
+      const on = !!(tile && tile.checked);
+      st.classList.toggle('in-kit', on);
+      st.setAttribute('aria-pressed', String(on));
+      st.querySelector('.sticker-state').textContent = on ? '✓ в ките' : '＋ добавить';
+    });
+  }
+
+  /* ---------- анимация чисел ---------- */
+  function tween(el, to, fmt) {
+    const from = parseFloat(el.dataset.v || '0');
+    el.dataset.v = to;
+    if (el._raf) cancelAnimationFrame(el._raf);
+    if (reduceMotion || from === to) { el.textContent = fmt(to); return; }
+    const t0 = performance.now(), dur = 380;
+    const step = now => {
+      const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = fmt(Math.round(from + (to - from) * e));
+      if (k < 1) el._raf = requestAnimationFrame(step);
+    };
+    el._raf = requestAnimationFrame(step);
+  }
+  const fmtWeight = w => w >= 1000 ? (w / 1000).toFixed(2) + ' кг' : w + ' г';
+  const fmtPrice = p => p.toLocaleString('ru-RU') + ' $';
+  function popMetric(el) { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+
+  /* ---------- blueprint ---------- */
+  const LENS_W = { small: 44, medium: 68, large: 96 };
+  function setPart(id, on) {
+    const g = $(id);
+    g.classList.toggle('on', on);
+    g.setAttribute('tabindex', on ? '0' : '-1');
+  }
+  function updateBlueprint(hasBody, hasLens, size, parts) {
+    setPart('gBody', hasBody);
+    setPart('gLensG', hasLens);
+    const W = LENS_W[size] || 68;
+    $('lensBarrel').setAttribute('width', W);
+    $('lensRing').setAttribute('x', 332 + W * .32);
+    $('lensHit').setAttribute('width', W + 80);
+    $('gFront').setAttribute('transform', 'translate(' + (W - 68) + ',0)');
+    setPart('gCage', parts.has('cage'));
+    setPart('gTop', parts.has('top-handle'));
+    setPart('gSide', parts.has('side-handle'));
+    setPart('gMatte', parts.has('mattebox'));
+    setPart('gMon', parts.has('monitor'));
+    setPart('gVmount', parts.has('vmount'));
+    const led = parts.has('led'), flash = parts.has('flash');
+    setPart('gLight', led || flash);
+    $('lightLabel').textContent = led && flash ? 'LED+FLASH' : flash ? 'FLASH' : 'LED';
+  }
+
+  /* ---------- инструкция ---------- */
+  const doneSteps = new Set();
+  function buildGuide(body, lens, extras) {
+    const list = $('steps');
+    const has = n => extras.some(e => e.toLowerCase().includes(n));
+    const steps = [];
+    if (body) steps.push(['base', 'Подготовка базы', 'Вставьте аккумулятор и карту памяти в <em>' + body + '</em> до монтажа клетки.']);
+    if (has('клетка')) steps.push(['cage', 'Монтаж клетки', 'Наденьте <em>клетку (Cage)</em> и затяните нижний винт 1/4" и боковые стопоры.']);
+    if (lens) steps.push(['lens', 'Установка оптики', 'Совместите метки байонета и пристегните <em>' + lens + '</em> до щелчка.']);
+    if (has('компендиум')) steps.push(['matte', 'Компендиум', 'Закрепите <em>Matte Box</em> на передней части объектива и вставьте ND-фильтр.']);
+    if (has('ручка') || has('рукоятка')) steps.push(['grip', 'Эргономика', 'Прикрутите <em>рукоятки</em> и проверьте баланс хватом одной рукой.']);
+    if (has('свет') || has('вспышка') || has('монитор')) steps.push(['light', 'Свет и экран', 'Установите <em>свет / монитор</em> на холодный башмак или кронштейн, зафиксируйте кабели.']);
+    if (has('v-mount')) steps.push(['power', 'Питание (строго в конце!)', 'Подключите <em>V-Mount</em> последним, чтобы избежать скачка напряжения в HDMI.']);
+    list.innerHTML = '';
+    if (!steps.length) {
+      list.innerHTML = '<li class="empty-step">Выберите камеру и объектив слева — инструкция соберётся сама ✨</li>';
+      $('guideProgress').textContent = '0 / 0';
+      return;
+    }
+    const updateProgress = () => {
+      $('guideProgress').textContent = list.querySelectorAll('.step.done').length + ' / ' + steps.length;
+    };
+    steps.forEach(([key, title, text], i) => {
+      const li = document.createElement('li');
+      li.className = 'step' + (doneSteps.has(key) ? ' done' : '');
+      li.innerHTML = '<span class="step-check"></span><span class="step-text"><strong>' + (i + 1) + '. ' + title + ':</strong> ' + text + '</span>';
+      li.addEventListener('click', () => {
+        li.classList.toggle('done');
+        if (li.classList.contains('done')) doneSteps.add(key); else doneSteps.delete(key);
+        updateProgress(); tick();
+      });
+      list.appendChild(li);
+    });
+    updateProgress();
+  }
+
+  /* ---------- главный пересчёт ---------- */
+  let summaryText = '', prevOver = false;
+  function recalculate() {
+    const bv = bodySel.value.split('|'), lv = lensSel.value.split('|');
+    const bw = +bv[0], bp = +bv[1], bn = bv[2];
+    const lw = +lv[0], lp = +lv[1], ln = lv[2];
+    const size = lensSel.options[lensSel.selectedIndex].dataset.size || 'small';
+    let weight = bw + lw, price = bp + lp;
+    const extras = [], parts = new Set();
+    tiles.forEach(t => {
+      if (t.checked) { weight += +t.dataset.weight; price += +t.dataset.price; extras.push(t.dataset.name); parts.add(t.dataset.part); }
+    });
+
+    updateBlueprint(bw > 0, lw > 0, size, parts);
+    syncStickers();
+    if (!scrim.hidden && modalKey) renderModal(modalKey);
+
+    tween($('totalWeight'), weight, fmtWeight);
+    tween($('totalPrice'), price, fmtPrice);
+    $('hudWeight').textContent = fmtWeight(weight);
+    $('hudBudget').textContent = 'BUDGET: ' + fmtPrice(price);
+    popMetric($('mWeight')); popMetric($('mPrice'));
+
+    const load = $('loadBar'), advice = $('weightAdvice'), hudStatus = $('hudStatus');
+    load.style.width = Math.min(100, Math.round(weight / 3500 * 100)) + '%';
+    load.classList.remove('warn', 'bad', 'good');
+    hudStatus.classList.remove('warn', 'bad', 'good');
+    if (weight === 0) {
+      advice.textContent = 'Не выбрано'; advice.style.color = '';
+      hudStatus.textContent = '[ ОЖИДАНИЕ СБОРКИ ]';
+    } else if (weight <= 1300) {
+      advice.textContent = 'Лёгкий (одной рукой) 🌸'; advice.style.color = 'var(--mint)';
+      load.classList.add('good'); hudStatus.classList.add('good');
+      hudStatus.textContent = '[ НАГРУЗКА: ЛЁГКАЯ ]';
+    } else if (weight <= 2400) {
+      advice.textContent = 'Средний (нужен ремень) 🎀'; advice.style.color = 'var(--amber)';
+      load.classList.add('warn'); hudStatus.classList.add('warn');
+      hudStatus.textContent = '[ НАГРУЗКА: СРЕДНЯЯ ]';
+    } else {
+      advice.textContent = 'Тяжёлый (риг / штатив) ⚠️'; advice.style.color = 'var(--danger)';
+      load.classList.add('bad'); hudStatus.classList.add('bad');
+      hudStatus.textContent = '[ ВНИМАНИЕ: ТЯЖЁЛЫЙ РИГ ]';
+    }
+
+    const limit = +$('limitRange').value;
+    const over = price > limit;
+    $('budgetAdvice').textContent = fmtPrice(price) + ' / ' + fmtPrice(limit);
+    const bBar = $('budgetBar');
+    bBar.style.width = Math.min(100, Math.round(price / limit * 100)) + '%';
+    bBar.classList.remove('good', 'warn', 'bad');
+    bBar.classList.add(over ? 'bad' : price > limit * .8 ? 'warn' : 'good');
+    $('mPrice').classList.toggle('over', over);
+    $('hudBudget').classList.toggle('bad', over);
+    if (over && !prevOver) say('⚠️ Кит вышел за лимит бюджета на ' + fmtPrice(price - limit));
+    prevOver = over;
+
+    summaryText = '📷 Сборка Photo Kit 2026:\n' +
+      '• Камера: ' + (bw > 0 ? bn : 'не выбрана') + '\n' +
+      '• Объектив: ' + (lw > 0 ? ln : 'не выбран') + '\n' +
+      (extras.length ? '• Обвес и свет: ' + extras.join(', ') + '\n' : '') +
+      '⚖️ Итоговая масса: ' + fmtWeight(weight) + '\n' +
+      '💰 Примерный бюджет: ' + fmtPrice(price) + '\n' +
+      '🎯 Лимит бюджета: ' + fmtPrice(limit) + (over ? ' (превышен!)' : '');
+
+    buildGuide(bw > 0 ? bn : null, lw > 0 ? ln : null, extras);
+  }
+
+  bodySel.addEventListener('change', () => { if (!applyingPreset) setActivePreset(null); recalculate(); tick(); });
+  lensSel.addEventListener('change', () => { if (!applyingPreset) setActivePreset(null); recalculate(); tick(); });
+  tiles.forEach(t => t.addEventListener('change', () => { if (!applyingPreset) setActivePreset(null); recalculate(); tick(); }));
+
+  /* ---------- пульт стенда ---------- */
+  $('limitRange').addEventListener('input', e => {
+    $('limitOut').textContent = (+e.target.value).toLocaleString('ru-RU') + ' $';
+    recalculate();
+  });
+  $('zoomRange').addEventListener('input', e => {
+    const z = +e.target.value / 100;
+    $('zoomOut').textContent = e.target.value + '%';
+    const w = 520 / z, h = 300 / z;
+    svg.setAttribute('viewBox', ((520 - w) / 2) + ' ' + ((300 - h) / 2) + ' ' + w + ' ' + h);
+  });
+  $('gridToggle').addEventListener('change', e => { svg.classList.toggle('grid', e.target.checked); tick(); });
+  $('labelToggle').addEventListener('change', e => { svg.classList.toggle('labels', e.target.checked); tick(); });
+
+  /* ---------- экспорт ---------- */
+  $('copyBtn').addEventListener('click', function () {
+    if (!summaryText) return;
+    const btn = this;
+    const done = () => {
+      btn.classList.add('copied');
+      btn.textContent = '✅ СКОПИРОВАНО!';
+      shutter(); say('Спецификация в буфере обмена 📋');
+      setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '📋 СКОПИРОВАТЬ СПЕЦИФИКАЦИЮ'; }, 2200);
+    };
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = summaryText; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) { say('Не удалось скопировать 😿'); }
+      document.body.removeChild(ta);
+    };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(summaryText).then(done).catch(fallback);
+    else fallback();
+  });
+  $('downloadBtn').addEventListener('click', () => {
+    if (!summaryText) return;
+    const blob = new Blob([summaryText], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'photo-kit-2026.txt';
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 400);
+    shutter(); say('Спецификация скачана ⬇');
+  });
+
+  /* ---------- reveal + scrollspy ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) document.querySelectorAll('[data-spy-link]').forEach(a => a.classList.toggle('active', a.dataset.spyLink === e.target.dataset.spy));
+  }), { rootMargin: '-40% 0px -55% 0px' });
+  document.querySelectorAll('[data-spy]').forEach(s => spy.observe(s));
+
+  recalculate();
+});
+</script>
+</body>
+</html>

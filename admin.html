@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Админ | Photo Kit 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--candy:#ff4fa0;--candy-deep:#d6217f;--berry:#8f1d5c;--plum:#4a0e33;--bubble:#ffd6ea;--mint:#0fae8d;--amber:#ffaa1f;--danger:#e5484d;--glass:rgba(255,255,255,.66);--line:rgba(214,33,127,.2);--shadow:0 24px 60px rgba(214,33,127,.2);--fd:'Unbounded',system-ui,sans-serif;--fb:'Manrope',system-ui,sans-serif;--fm:ui-monospace,'Courier New',monospace;--nav-h:64px}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:var(--fb);color:var(--plum);background:radial-gradient(60% 46% at 50% 0%,#fff0f7 0%,#ffd9ec 45%,#ffb7d9 100%)}
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:60;width:min(1160px,calc(100% - 24px));height:var(--nav-h);display:flex;align-items:center;gap:12px;padding:0 18px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.9);box-shadow:0 12px 34px rgba(214,33,127,.18)}
+.nav-brand{font:800 13px var(--fd);color:var(--candy-deep);text-decoration:none}
+.nav-spacer{flex:1}
+.nav-cta{font:800 12px var(--fd);color:#fff;text-decoration:none;padding:11px 20px;border-radius:999px;background:linear-gradient(135deg,#ff77b9,#ff2f92 55%,#d6217f)}
+.wrap{max-width:1100px;margin:0 auto;padding:calc(var(--nav-h) + 50px) 22px 80px}
+h1{font:800 clamp(22px,4vw,30px) var(--fd);color:var(--candy-deep);margin:0 0 18px}
+.card{background:var(--glass);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.9);border-radius:22px;box-shadow:var(--shadow);padding:20px;margin-bottom:20px;overflow-x:auto}
+h2{font:700 15px var(--fd);color:var(--candy-deep);margin:0 0 14px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font:700 10px var(--fm);letter-spacing:.14em;text-transform:uppercase;color:var(--berry);padding:8px 10px;border-bottom:2px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:hover td{background:rgba(255,255,255,.4)}
+.role-sel{border:2px solid var(--line);border-radius:10px;background:#fff;padding:6px 9px;font:700 12px var(--fb);color:var(--plum)}
+.btn{border:none;cursor:pointer;padding:8px 13px;border-radius:11px;font:800 11px var(--fd);color:var(--candy-deep);background:rgba(255,255,255,.8);border:2px solid var(--line)}
+.btn:hover{border-color:var(--candy)}
+.btn.del{color:var(--danger);border-color:rgba(229,72,77,.4)}
+.btn.del:hover{border-color:var(--danger)}
+.tag{font:700 9px var(--fm);padding:3px 9px;border-radius:7px;background:rgba(255,255,255,.8);border:1px solid var(--line);color:var(--candy-deep)}
+.tag.admin{color:#fff;background:linear-gradient(135deg,var(--candy),var(--candy-deep));border-color:transparent}
+.mono{font:600 11px var(--fm);color:var(--berry)}
+.pk-toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,18px);z-index:200;opacity:0;pointer-events:none;font:700 12.5px var(--fb);color:var(--plum);background:rgba(255,255,255,.95);border:1px solid var(--line);padding:11px 16px;border-radius:999px;box-shadow:0 16px 40px rgba(74,14,51,.28);transition:.28s}
+.pk-toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<nav class="nav"><a class="nav-brand" href="/index.html">📷 PHOTO KIT 2026 • АДМИН</a><div class="nav-spacer"></div><a class="nav-cta" href="/index.html">НА ГЛАВНУЮ</a></nav>
+<main class="wrap">
+  <h1>🛠 Панель администратора</h1>
+  <section class="card"><h2>Пользователи (users.csv)</h2>
+    <table><thead><tr><th>Логин</th><th>Роль</th><th>Аватар</th><th></th></tr></thead><tbody id="users"></tbody></table>
+  </section>
+  <section class="card"><h2>Журнал действий (logs.csv) <button class="btn" id="refresh" style="margin-left:10px">↻ ОБНОВИТЬ</button></h2>
+    <table><thead><tr><th>Время</th><th>Кто</th><th>Метод</th><th>Куда</th><th>Действие</th></tr></thead><tbody id="logs"></tbody></table>
+  </section>
+</main>
+<script src="../static/photokit.js"></script>
+<script>
+PK.onReady(function () {
+  if (!PK.me() || PK.me().role !== 'admin') { location.href = '/index.html'; return; }
+  function loadUsers() {
+    PK.api('/api/users').then(function (r) { return r.json(); }).then(function (rows) {
+      document.getElementById('users').innerHTML = rows.map(function (u) {
+        return '<tr><td><b>' + PK.esc(u.login) + '</b></td>' +
+          '<td><select class="role-sel" data-login="' + PK.esc(u.login) + '"><option value="reader"' + (u.role === 'reader' ? ' selected' : '') + '>читатель</option><option value="admin"' + (u.role === 'admin' ? ' selected' : '') + '>админ</option></select></td>' +
+          '<td class="mono">' + PK.esc(u.avatar) + '</td>' +
+          '<td><button class="btn del" data-del="' + PK.esc(u.login) + '">🗑 Удалить</button></td></tr>';
+      }).join('');
+      document.querySelectorAll('.role-sel').forEach(function (s) { s.addEventListener('change', function () {
+        PK.api('/api/users/' + s.dataset.login + '/role', { method: 'POST', body: JSON.stringify({ role: s.value }) })
+          .then(function () { PK.toast('Роль обновлена: ' + s.dataset.login + ' → ' + s.value); loadUsers(); }).catch(function () {});
+      }); });
+      document.querySelectorAll('[data-del]').forEach(function (b) { b.addEventListener('click', function () {
+        PK.api('/api/users/' + b.dataset.del, { method: 'DELETE' })
+          .then(function () { PK.toast('Пользователь удалён: ' + b.dataset.del); loadUsers(); }).catch(function () {});
+      }); });
+    }).catch(function () {});
+  }
+  function loadLogs() {
+    PK.api('/api/logs').then(function (r) { return r.json(); }).then(function (rows) {
+      document.getElementById('logs').innerHTML = rows.map(function (l) {
+        return '<tr><td class="mono">' + PK.esc(l.time) + '</td><td><span class="tag' + (l.login === 'admin' ? ' admin' : '') + '">' + PK.esc(l.login) + '</span></td><td class="mono">' + PK.esc(l.method) + '</td><td class="mono">' + PK.esc(l.path) + '</td><td>' + PK.esc(l.note) + '</td></tr>';
+      }).join('') || '<tr><td colspan="5">Пока тихо.</td></tr>';
+    }).catch(function () {});
+  }
+  document.getElementById('refresh').addEventListener('click', loadLogs);
+  loadUsers(); loadLogs();
+  setInterval(loadLogs, 15000);
+});
+</script>
+</body>
+</html>

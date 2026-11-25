@@ -1,0 +1,3 @@
+login,password_hash,avatar,role
+admin,03c91e1f8d5b085f:25c88a61097e8ae18938d10c8376dd628130eb7862cfb5a1c315eb6767dc167f,static/avatars/default.svg,admin
+reader,3ff798b7c35a84a8:4882dc9f4df6cc8244b7f3e4d41ac3d7b378bc5607f8a5d06e966b9be94db7a7,static/avatars/default.svg,reader

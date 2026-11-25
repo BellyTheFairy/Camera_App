@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вход | Photo Kit 2026</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%B7%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--candy:#ff4fa0;--candy-hot:#ff2f92;--candy-deep:#d6217f;--berry:#8f1d5c;--plum:#4a0e33;--bubble:#ffd6ea;--paper:#fffafd;--mint:#0fae8d;--amber:#ffaa1f;--danger:#e5484d;--electric:#3e63ff;--glass:rgba(255,255,255,.66);--line:rgba(214,33,127,.2);--shadow:0 24px 60px rgba(214,33,127,.2),0 4px 14px rgba(214,33,127,.12);--fd:'Unbounded',system-ui,sans-serif;--fb:'Manrope',system-ui,sans-serif;--fm:ui-monospace,'JetBrains Mono','Courier New',monospace;--nav-h:64px}
+*{box-sizing:border-box}
+html{scrollbar-width:thin;scrollbar-color:var(--candy) var(--bubble)}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:var(--bubble)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--candy),var(--candy-deep));border-radius:8px;border:2px solid var(--bubble)}
+::-webkit-scrollbar-thumb:hover{background:var(--candy-deep)}
+body{margin:0;min-height:100vh;font-family:var(--fb);color:var(--plum);background:#ffe1ef;overflow-x:hidden}
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(46% 38% at 14% 16%,rgba(255,217,194,.85) 0%,rgba(255,217,194,0) 70%),radial-gradient(42% 36% at 86% 12%,rgba(227,208,255,.8) 0%,rgba(227,208,255,0) 70%),radial-gradient(60% 46% at 50% 96%,rgba(255,79,160,.3) 0%,rgba(255,79,160,0) 72%),radial-gradient(70% 60% at 50% 45%,rgba(255,255,255,.75) 0%,rgba(255,240,247,.2) 60%,rgba(255,214,234,.5) 100%)}
+.bg-glow{position:fixed;z-index:0;pointer-events:none;border-radius:50%;filter:blur(70px);opacity:.5}
+.bg-glow.g1{width:44vw;height:44vw;left:-12vw;top:22vh;background:radial-gradient(circle,rgba(255,122,185,.55),transparent 70%);animation:glowDrift 26s ease-in-out infinite alternate}
+.bg-glow.g2{width:38vw;height:38vw;right:-10vw;top:52vh;background:radial-gradient(circle,rgba(186,140,255,.4),transparent 70%);animation:glowDrift 32s ease-in-out infinite alternate-reverse}
+@keyframes glowDrift{from{transform:translate(0,0) scale(1)}to{transform:translate(6vw,-8vh) scale(1.15)}}
+.bg-cam{position:fixed;z-index:0;pointer-events:none;filter:drop-shadow(0 18px 22px rgba(214,33,127,.28));opacity:.5;animation:camFloat 16s ease-in-out infinite alternate}
+@keyframes camFloat{from{transform:translateY(0) rotate(var(--rot))}to{transform:translateY(-34px) rotate(calc(var(--rot) + 6deg))}}
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.spark{position:fixed;z-index:1;pointer-events:none;color:#fff;text-shadow:0 0 14px rgba(255,255,255,.95);animation:drift 9s ease-in-out infinite;opacity:.85}
+@keyframes drift{0%,100%{transform:translateY(0) rotate(0);opacity:.45}50%{transform:translateY(-24px) rotate(22deg);opacity:1}}
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:60;width:min(1160px,calc(100% - 24px));height:var(--nav-h);display:flex;align-items:center;gap:12px;padding:0 18px;border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(18px) saturate(1.3);border:1px solid rgba(255,255,255,.9);box-shadow:0 12px 34px rgba(214,33,127,.18)}
+.nav-brand{display:flex;align-items:center;gap:9px;font:800 13px var(--fd);color:var(--candy-deep);text-decoration:none;white-space:nowrap}
+.nav-brand .dot{width:10px;height:10px;border-radius:50%;background:var(--danger);box-shadow:0 0 10px var(--danger);animation:blink 1.4s infinite}
+@keyframes blink{0%,55%{opacity:1}56%,100%{opacity:.25}}
+.nav-links{display:flex;gap:4px;margin-left:6px}
+.nav-links a{font:700 12.5px var(--fb);color:var(--berry);text-decoration:none;padding:8px 13px;border-radius:999px;transition:background .2s}
+.nav-links a:hover{background:rgba(255,79,160,.12)}
+.nav-spacer{flex:1}
+.nav-btn{border:1px solid var(--line);cursor:pointer;font:700 11px var(--fm);letter-spacing:.1em;color:var(--berry);background:rgba(255,255,255,.7);padding:8px 13px;border-radius:999px;transition:background .2s,transform .12s}
+.nav-btn:hover{background:#fff}.nav-btn:active{transform:scale(.95)}
+.nav-cta{font:800 12px var(--fd);color:#fff;text-decoration:none;padding:11px 20px;border-radius:999px;background:linear-gradient(135deg,#ff77b9,#ff2f92 55%,#d6217f);box-shadow:0 8px 20px rgba(214,33,127,.35),inset 0 2px 0 rgba(255,255,255,.4);transition:transform .18s,filter .18s;white-space:nowrap}
+.nav-cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.nav-ghost{font:800 12px var(--fb);color:var(--candy-deep);text-decoration:none;padding:10px 14px;border-radius:999px;border:2px solid var(--line);transition:border-color .2s,background .2s;white-space:nowrap}
+.nav-ghost:hover{border-color:var(--candy);background:#fff}
+.camera-hud{position:fixed;inset:0;z-index:50;pointer-events:none;font-family:var(--fm);color:var(--berry);user-select:none}
+.hud-corner{position:absolute;width:32px;height:32px;border:3px solid var(--candy-deep);filter:drop-shadow(0 0 6px rgba(255,79,160,.45))}
+.top-left{top:calc(var(--nav-h) + 26px);left:16px;border-width:3px 0 0 3px;border-radius:8px 0 0 0}
+.top-right{top:calc(var(--nav-h) + 26px);right:16px;border-width:3px 3px 0 0;border-radius:0 8px 0 0}
+.bottom-left{bottom:16px;left:16px;border-width:0 0 3px 3px;border-radius:0 0 0 8px}
+.bottom-right{bottom:16px;right:16px;border-width:0 3px 3px 0;border-radius:0 0 8px 0}
+.hud-bottom{position:absolute;left:62px;right:62px;bottom:20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:11.5px;font-weight:700;letter-spacing:.12em}
+.hud-chip{background:rgba(255,255,255,.66);border:1px solid var(--line);padding:5px 13px;border-radius:999px;backdrop-filter:blur(6px);transition:color .3s,border-color .3s}
+.hud-chip.warn{color:var(--amber);border-color:rgba(255,170,31,.5)}
+.hud-chip.good{color:var(--mint);border-color:rgba(15,174,141,.5)}
+.wrap{position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:calc(var(--nav-h) + 62px) 26px 110px;min-height:100vh;display:flex;align-items:center}
+.auth-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:30px;align-items:center;width:100%}
+.card-wrap{position:relative;animation:rise .7s cubic-bezier(.22,1,.36,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.98)}to{opacity:1;transform:none}}
+.focus-frame{position:absolute;inset:-16px;pointer-events:none}
+.ff-corner{position:absolute;width:24px;height:24px;border:3px solid var(--candy);transition:border-color .25s,filter .25s}
+.ff-tl{top:0;left:0;border-width:3px 0 0 3px;border-radius:6px 0 0 0}.ff-tr{top:0;right:0;border-width:3px 3px 0 0;border-radius:0 6px 0 0}
+.ff-bl{bottom:0;left:0;border-width:0 0 3px 3px;border-radius:0 0 0 6px}.ff-br{bottom:0;right:0;border-width:0 3px 3px 0;border-radius:0 0 6px 0}
+.ff-label{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font:700 10px var(--fm);letter-spacing:.18em;color:var(--candy-deep);background:var(--paper);border:1px solid var(--line);padding:3px 12px;border-radius:999px;white-space:nowrap;transition:color .25s}
+.focus-frame.locked .ff-corner{border-color:var(--mint);filter:drop-shadow(0 0 6px rgba(15,174,141,.5))}
+.focus-frame.locked .ff-label{color:var(--mint)}
+.card{position:relative;overflow:hidden;background:var(--glass);backdrop-filter:blur(20px) saturate(1.25);border:1px solid rgba(255,255,255,.9);border-radius:26px;box-shadow:var(--shadow);padding:30px 30px 24px}
+.card::before{content:'';position:absolute;inset:0 0 auto 0;height:80px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:8px;font:700 10.5px var(--fm);letter-spacing:.2em;color:var(--candy-deep);background:rgba(255,255,255,.72);border:1px solid var(--line);padding:6px 16px;border-radius:999px;margin-bottom:14px}
+.card h2{margin:0 0 8px;font:800 clamp(24px,4.6vw,32px)/1.15 var(--fd);background:linear-gradient(100deg,var(--berry),var(--candy-hot) 45%,var(--candy-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{margin:0 0 8px;font-size:13.5px;line-height:1.6;color:var(--berry)}
+.input-group{position:relative;margin:18px 0}
+.input-group input{width:100%;padding:20px 48px 12px 16px;font:600 15px var(--fb);color:var(--plum);background:rgba(255,255,255,.85);border:2px solid var(--line);border-radius:16px;outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+.input-group input:focus{border-color:var(--candy);box-shadow:0 0 0 4px rgba(255,79,160,.18);background:#fff}
+.input-group label{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:600;color:var(--berry);opacity:.7;pointer-events:none;transition:all .18s ease}
+.input-group input:focus + label,.input-group input:not(:placeholder-shown) + label{top:11px;transform:none;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--candy-deep);opacity:1}
+.eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:none;border-radius:12px;background:transparent;cursor:pointer;font-size:16px;display:grid;place-items:center;transition:background .2s,transform .12s}
+.eye:hover{background:rgba(255,79,160,.14)}.eye:active{transform:translateY(-50%) scale(.9)}
+.btn-slot{min-height:56px;margin-top:22px}
+.btn-login{width:100%;padding:16px;border:none;border-radius:16px;cursor:pointer;font:800 15px var(--fd);letter-spacing:.06em;color:#fff;background:linear-gradient(135deg,#ff77b9,#ff2f92 55%,#d6217f);box-shadow:0 12px 26px rgba(214,33,127,.35),inset 0 2px 0 rgba(255,255,255,.45);transition:transform .18s,box-shadow .18s,filter .18s}
+.btn-login:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.btn-login:active{transform:scale(.98)}
+.film-status{margin-top:14px;padding:9px 12px;text-align:center;font:700 11px var(--fm);letter-spacing:.05em;color:var(--berry);background:rgba(255,255,255,.6);border:1px dashed var(--line);border-radius:12px;transition:color .3s,border-color .3s}
+.film-status.chasing{color:var(--amber);border-color:rgba(255,170,31,.5)}
+.film-status.done{color:var(--mint);border-color:rgba(15,174,141,.5)}
+.toggle-link{margin-top:16px;text-align:center;font-size:13.5px;color:var(--berry)}
+.toggle-link a{color:var(--candy-deep);font-weight:800;text-decoration:none;border-bottom:2px solid rgba(214,33,127,.25)}
+.toggle-link a:hover{border-color:var(--candy-hot)}
+.art-panel{position:relative;height:420px}
+.art{position:absolute;filter:drop-shadow(0 16px 20px rgba(214,33,127,.3));animation:artFloat 6s ease-in-out infinite alternate}
+@keyframes artFloat{from{translate:0 0}to{translate:0 -16px}}
+.main-cam{width:74%;left:13%;top:60px;z-index:3}
+.side-lens{width:46%;left:-2%;bottom:70px;transform:rotate(-12deg);z-index:2;animation-delay:-2s}
+.side-flash{width:24%;right:2%;top:6px;transform:rotate(10deg);z-index:2;animation-delay:-4s}
+.art-shadow{position:absolute;height:18px;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(143,29,92,.35),transparent 70%);filter:blur(6px);animation:shadowBreath 6s ease-in-out infinite alternate}
+@keyframes shadowBreath{from{transform:scaleX(1);opacity:.8}to{transform:scaleX(.78);opacity:.45}}
+.art-shadow.s1{left:24%;right:24%;bottom:44px}.art-shadow.s2{left:2%;width:38%;bottom:36px;animation-delay:-2s}.art-shadow.s3{right:3%;width:20%;bottom:70px;animation-delay:-4s}
+.art-panel .spark{position:absolute;z-index:4}
+.quips{position:absolute;left:0;right:0;bottom:-6px;display:flex;flex-direction:column;gap:8px;z-index:5}
+.quip{font:700 11px var(--fm);letter-spacing:.04em;color:var(--berry);background:rgba(255,255,255,.78);border:1px solid var(--line);border-radius:999px;padding:7px 14px;backdrop-filter:blur(8px);box-shadow:0 8px 18px rgba(214,33,127,.14);width:max-content;max-width:100%}
+.quip:nth-child(2){align-self:flex-end}
+#toast{position:fixed;top:calc(var(--nav-h) + 26px);left:50%;transform:translate(-50%,-16px);z-index:120;opacity:0;pointer-events:none;font:700 12px var(--fm);color:var(--berry);background:rgba(255,255,255,.92);border:1px solid var(--line);padding:10px 18px;border-radius:999px;box-shadow:0 12px 30px rgba(214,33,127,.25);backdrop-filter:blur(10px);transition:opacity .3s,transform .3s;max-width:calc(100vw - 40px);text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+footer{position:relative;z-index:10;text-align:center;padding:0 20px 96px;font:600 11px var(--fm);letter-spacing:.12em;color:var(--berry)}
+footer a{color:var(--candy-deep);text-decoration:none;font-weight:800}footer a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid rgba(255,79,160,.55);outline-offset:2px;border-radius:8px}
+@media (max-width:960px){.auth-grid{grid-template-columns:1fr}.art-panel{height:300px;order:2}.nav-links,.nav-ghost{display:none}.quips{bottom:-14px}}
+@media (max-width:560px){.wrap{padding-left:14px;padding-right:14px}.card{padding:24px 20px 20px}.hud-bottom{left:16px;right:16px;font-size:9.5px}.hud-corner{width:22px;height:22px}.art-panel{height:250px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+<script src="../static/photokit.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="sBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9f4"/><stop offset=".45" stop-color="#ff9cc9"/><stop offset=".78" stop-color="#ef5fa7"/><stop offset="1" stop-color="#d6217f"/></linearGradient>
+<linearGradient id="sPart" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff5fa"/><stop offset=".6" stop-color="#ffc3dd"/><stop offset="1" stop-color="#ff8fc0"/></linearGradient>
+<linearGradient id="sLens" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd6ea"/><stop offset=".5" stop-color="#ff9cc9"/><stop offset="1" stop-color="#d6217f"/></linearGradient>
+<radialGradient id="sLensFace" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#ffe3f1"/><stop offset=".55" stop-color="#ff8fc0"/><stop offset="1" stop-color="#c22a7e"/></radialGradient>
+<radialGradient id="sGlass" cx=".35" cy=".3" r=".95"><stop offset="0" stop-color="#d989b8"/><stop offset=".55" stop-color="#8f1d5c"/><stop offset="1" stop-color="#4a0e33"/></radialGradient>
+<radialGradient id="sGlassCore" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#ff9cc9"/><stop offset=".5" stop-color="#c4589a"/><stop offset="1" stop-color="#6b1547"/></radialGradient>
+<linearGradient id="sAmber" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe3a3"/><stop offset="1" stop-color="#ffaa1f"/></linearGradient>
+<linearGradient id="sScreen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3e63ff"/><stop offset=".55" stop-color="#b06bff"/><stop offset="1" stop-color="#ff4fa0"/></linearGradient>
+<linearGradient id="bgBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe3f1"/><stop offset=".5" stop-color="#ff9cc9"/><stop offset="1" stop-color="#f06bab"/></linearGradient>
+<linearGradient id="bgLens" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb1d4"/><stop offset="1" stop-color="#d6217f"/></linearGradient>
+<radialGradient id="bgGlass" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#c4589a"/><stop offset=".6" stop-color="#8f1d5c"/><stop offset="1" stop-color="#4a0e33"/></radialGradient>
+<symbol id="camSym" viewBox="0 0 120 90"><rect x="40" y="12" width="40" height="20" rx="8" fill="url(#bgBody)"/><rect x="8" y="26" width="104" height="56" rx="13" fill="url(#bgBody)"/><rect x="12" y="30" width="96" height="12" rx="6" fill="#fff" opacity=".45"/><circle cx="60" cy="54" r="23" fill="url(#bgLens)"/><circle cx="60" cy="54" r="14" fill="url(#bgGlass)"/><ellipse cx="53" cy="46" rx="7" ry="4.5" fill="#fff" opacity=".75"/><circle cx="99" cy="37" r="4" fill="#fff" opacity=".85"/></symbol>
+<symbol id="camGlossy" viewBox="0 0 220 160"><circle cx="16" cy="70" r="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/><circle cx="204" cy="70" r="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/><rect x="76" y="16" width="68" height="36" rx="13" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2"/><rect x="84" y="21" width="52" height="10" rx="5" fill="#fff" opacity=".55"/><rect x="40" y="26" width="22" height="14" rx="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/><rect x="176" y="28" width="20" height="12" rx="6" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/><rect x="18" y="44" width="184" height="98" rx="22" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/><rect x="26" y="50" width="168" height="18" rx="9" fill="#fff" opacity=".5"/><rect x="26" y="126" width="168" height="10" rx="5" fill="#8f1d5c" opacity=".16"/><rect x="168" y="52" width="28" height="82" rx="13" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/><rect x="173" y="58" width="8" height="66" rx="4" fill="#fff" opacity=".45"/><circle cx="102" cy="93" r="41" fill="url(#sLens)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/><circle cx="102" cy="93" r="33" fill="url(#sLensFace)"/><circle cx="102" cy="93" r="23" fill="url(#sGlass)"/><circle cx="102" cy="93" r="12" fill="url(#sGlassCore)"/><ellipse cx="90" cy="79" rx="10" ry="6" fill="#fff" opacity=".85" transform="rotate(-24 90 79)"/><circle cx="112" cy="103" r="3.5" fill="#fff" opacity=".6"/><path d="M30 62 Q24 92 30 124" stroke="#fff" stroke-opacity=".6" stroke-width="3" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="lensGlossy" viewBox="0 0 180 120"><rect x="8" y="40" width="14" height="44" rx="6" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/><rect x="18" y="32" width="122" height="58" rx="17" fill="url(#sLens)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2.5"/><rect x="44" y="32" width="12" height="58" fill="#fff" opacity=".3"/><rect x="78" y="32" width="8" height="58" fill="#8f1d5c" opacity=".2"/><rect x="102" y="32" width="10" height="58" fill="#fff" opacity=".25"/><rect x="25" y="37" width="108" height="12" rx="6" fill="#fff" opacity=".5"/><ellipse cx="142" cy="61" rx="14" ry="31" fill="url(#sLens)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2"/><ellipse cx="145" cy="61" rx="9" ry="23" fill="url(#sGlass)"/><ellipse cx="142" cy="49" rx="3" ry="7" fill="#fff" opacity=".8"/></symbol>
+<symbol id="flashGlossy" viewBox="0 0 120 160"><rect x="28" y="12" width="64" height="46" rx="13" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2"/><rect x="34" y="18" width="52" height="22" rx="7" fill="url(#sAmber)"/><rect x="38" y="21" width="44" height="7" rx="3.5" fill="#fff" opacity=".6"/><rect x="44" y="58" width="32" height="18" rx="7" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/><rect x="36" y="74" width="48" height="52" rx="13" fill="url(#sBody)" stroke="#d6217f" stroke-opacity=".5" stroke-width="2"/><rect x="41" y="79" width="38" height="9" rx="4.5" fill="#fff" opacity=".5"/><rect x="44" y="92" width="32" height="16" rx="5" fill="url(#sScreen)"/><circle cx="60" cy="116" r="4" fill="#0fae8d"/><rect x="48" y="126" width="24" height="12" rx="5" fill="url(#sPart)" stroke="#d6217f" stroke-opacity=".4" stroke-width="2"/></symbol>
+</defs></svg>
+
+<div class="bg-mesh" aria-hidden="true"></div><div class="bg-glow g1" aria-hidden="true"></div><div class="bg-glow g2" aria-hidden="true"></div>
+<svg class="bg-cam" style="--rot:-14deg;width:180px;top:14%;left:4%;animation-duration:18s" aria-hidden="true"><use href="#camSym"/></svg>
+<svg class="bg-cam" style="--rot:11deg;width:120px;top:26%;right:6%;animation-duration:14s;animation-delay:-4s" aria-hidden="true"><use href="#camSym"/></svg>
+<svg class="bg-cam" style="--rot:-7deg;width:200px;bottom:12%;left:8%;animation-duration:21s;animation-delay:-8s" aria-hidden="true"><use href="#camSym"/></svg>
+<span class="spark" style="top:22%;left:26%;font-size:20px" aria-hidden="true">✦</span>
+<span class="spark" style="top:40%;right:20%;font-size:14px;animation-delay:-3s" aria-hidden="true">✦</span>
+<span class="spark" style="bottom:28%;left:40%;font-size:16px;animation-delay:-6s" aria-hidden="true">✦</span>
+
+<nav class="nav" aria-label="Основная навигация">
+  <a class="nav-brand" href="index.html"><span class="dot"></span>📷 PHOTO KIT 2026</a>
+  <div class="nav-links"><a href="index.html#builder">Конструктор</a><a href="index.html#gallery">Витрина</a></div>
+  <div class="nav-spacer"></div>
+  <button class="nav-btn" id="soundToggle" aria-pressed="true">🔊 ЗВУК</button>
+  <a class="nav-ghost" href="index.html">Главная</a>
+  <a class="nav-cta" href="register.html">РЕГИСТРАЦИЯ</a>
+</nav>
+
+<div class="camera-hud" aria-hidden="true">
+  <div class="hud-corner top-left"></div><div class="hud-corner top-right"></div>
+  <div class="hud-corner bottom-left"></div><div class="hud-corner bottom-right"></div>
+  <div class="hud-bottom">
+    <span class="hud-chip">ПОПЫТКИ: <span id="tryCount">00</span></span>
+    <span class="hud-chip" id="hudStatus">[ ОЖИДАНИЕ ВХОДА ]</span>
+    <span class="hud-chip">ТЕРПЕНИЕ: 98%</span>
+  </div>
+</div>
+<div id="toast" role="status"></div>
+
+<main class="wrap">
+  <div class="auth-grid">
+    <div class="card-wrap">
+      <div class="focus-frame" id="focusFrame" aria-hidden="true">
+        <span class="ff-corner ff-tl"></span><span class="ff-corner ff-tr"></span><span class="ff-corner ff-bl"></span><span class="ff-corner ff-br"></span>
+        <span class="ff-label" id="ffLabel">AF • READY</span>
+      </div>
+      <section class="card" id="card">
+        <span class="badge">📷 PHOTO KIT 2026 • ВХОД</span>
+        <h2>С возвращением!</h2>
+        <p class="sub">Введите данные</p>
+        <form id="loginForm" action="/login" method="post">
+          <input type="hidden" name="action" value="login">
+          <div class="input-group">
+            <input type="text" name="username" id="username" placeholder=" " required autocomplete="username">
+            <label for="username">Логин</label>
+          </div>
+          <div class="input-group">
+            <input type="password" name="password" id="password" placeholder=" " required autocomplete="current-password">
+            <label for="password">Пароль</label>
+            <button type="button" class="eye" id="eyeBtn" aria-label="Показать пароль" aria-pressed="false">👁</button>
+          </div>
+          <div class="btn-slot" id="btnSlot"><button type="submit" class="btn-login" id="loginBtn">ВОЙТИ</button></div>
+          <div class="film-status" id="filmStatus">🎀 Кнопка разминается: погоня длится 30 секунд</div>
+          <div class="toggle-link">Нет аккаунта? <a href="register.html">Регистрация</a></div>
+        </form>
+      </section>
+    </div>
+    <div class="art-panel" aria-hidden="true">
+      <span class="art-shadow s1"></span><span class="art-shadow s2"></span><span class="art-shadow s3"></span>
+      <svg class="art main-cam" viewBox="0 0 220 160"><use href="#camGlossy"/></svg>
+      <svg class="art side-lens" viewBox="0 0 180 120"><use href="#lensGlossy"/></svg>
+      <svg class="art side-flash" viewBox="0 0 120 160"><use href="#flashGlossy"/></svg>
+      <span class="spark" style="top:4%;left:12%;font-size:22px">✦</span>
+      <span class="spark" style="top:36%;right:26%;font-size:14px;animation-delay:-3s">✦</span>
+      <span class="spark" style="bottom:24%;right:8%;font-size:18px;animation-delay:-5s">✦</span>
+    </div>
+  </div>
+</main>
+
+<footer>PHOTO KIT 2026 • ВХОД ДЛЯ ТЕХ, КТО ПОЙМАЛ КНОПКУ • <a href="index.html">ГЛАВНАЯ</a> • <a href="register.html">РЕГИСТРАЦИЯ</a></footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const $ = id => document.getElementById(id);
+  const loginForm = $('loginForm'), loginBtn = $('loginBtn'), btnSlot = $('btnSlot');
+  const status = $('filmStatus'), frame = $('focusFrame'), ffLabel = $('ffLabel'), card = $('card');
+  const eyeBtn = $('eyeBtn'), passInput = $('password'), hudStatus = $('hudStatus'), tryEl = $('tryCount');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let audioCtx = null, soundOn = true;
+  function burst(t, dur, freq, gain) {
+    const buf = audioCtx.createBuffer(1, Math.floor(audioCtx.sampleRate * dur), audioCtx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 2);
+    const src = audioCtx.createBufferSource(); src.buffer = buf;
+    const f = audioCtx.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = freq;
+    const g = audioCtx.createGain(); g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+    src.connect(f); f.connect(g); g.connect(audioCtx.destination); src.start(t);
+  }
+  function tick() { if (!soundOn) return; try { audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)(); if (audioCtx.state === 'suspended') audioCtx.resume(); burst(audioCtx.currentTime, .04, 2400, .12); } catch (e) {} }
+  function shutter() { if (!soundOn) return; try { audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)(); if (audioCtx.state === 'suspended') audioCtx.resume(); const t = audioCtx.currentTime; burst(t, .07, 1400, .4); burst(t + .09, .09, 900, .3); } catch (e) {} }
+  $('soundToggle').addEventListener('click', function () { soundOn = !soundOn; this.textContent = soundOn ? '🔊 ЗВУК' : '🔇 ТИХО'; this.setAttribute('aria-pressed', String(soundOn)); if (soundOn) tick(); });
+
+  const toast = $('toast'); let toastTimer = 0;
+  function say(m) { toast.textContent = m; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 2400); }
+
+  eyeBtn.addEventListener('click', () => {
+    const show = passInput.type === 'password';
+    passInput.type = show ? 'text' : 'password';
+    eyeBtn.textContent = show ? '🙈' : '👁';
+    eyeBtn.setAttribute('aria-pressed', String(show));
+    eyeBtn.setAttribute('aria-label', show ? 'Скрыть пароль' : 'Показать пароль');
+    passInput.focus(); tick();
+  });
+  card.addEventListener('focusin', () => { frame.classList.add('locked'); ffLabel.textContent = 'AF LOCK ✓'; });
+  card.addEventListener('focusout', () => setTimeout(() => { if (!card.querySelector('input:focus')) { frame.classList.remove('locked'); ffLabel.textContent = 'AF • READY'; } }, 0));
+
+  /* ---- убегающая кнопка: 30 с, текст не меняется ---- */
+  const CHASE = 30000, RADIUS = 150, PAD = 20;
+  let chasing = false, unlocked = false, home = null, homeDirty = false;
+  let pos = { x: 0, y: 0 }, pointer = { x: -1e4, y: -1e4 };
+  let rafId = 0, wanderT = 0, unlockT = 0, statusT = 0, chaseStart = 0, tries = 0;
+  const taunts = ['Вы медленнее автофокуса 🐌', 'Почти! (нет)', 'Кнопка на кардио 🏃‍♀️', 'Курсор дрожит? Мы заметили', 'Это не баг, это спорт'];
+  const clamp = (v, a, b) => Math.min(Math.max(v, a), Math.max(a, b));
+  const vW = () => document.documentElement.clientWidth, vH = () => document.documentElement.clientHeight;
+  const size = () => ({ w: loginBtn.offsetWidth, h: loginBtn.offsetHeight });
+  function moveTo(x, y) { const { w, h } = size(); pos.x = clamp(x, PAD, vW() - w - PAD); pos.y = clamp(y, PAD, vH() - h - PAD); loginBtn.style.left = pos.x + 'px'; loginBtn.style.top = pos.y + 'px'; }
+  function fleeFrom(cx, cy) {
+    const { w, h } = size(); const bx = pos.x + w / 2, by = pos.y + h / 2;
+    let dx = bx - cx, dy = by - cy; const d = Math.hypot(dx, dy) || 1; dx /= d; dy /= d;
+    const step = 200 + Math.random() * 140, j = (Math.random() - .5) * 160;
+    const tx = bx + dx * step - dy * j - w / 2, ty = by + dy * step + dx * j - h / 2;
+    const nx = clamp(tx, PAD, vW() - w - PAD), ny = clamp(ty, PAD, vH() - h - PAD);
+    if (Math.hypot(nx + w / 2 - cx, ny + h / 2 - cy) < RADIUS + 40) {
+      const spots = [[PAD, PAD], [vW() - w - PAD, PAD], [PAD, vH() - h - PAD], [vW() - w - PAD, vH() - h - PAD], [(vW() - w) / 2, PAD], [(vW() - w) / 2, vH() - h - PAD], [PAD, (vH() - h) / 2], [vW() - w - PAD, (vH() - h) / 2]];
+      let best = spots[0], bd = -1;
+      for (const [sx, sy] of spots) { const dd = Math.hypot(sx + w / 2 - cx, sy + h / 2 - cy) + Math.random() * 120; if (dd > bd) { bd = dd; best = [sx, sy]; } }
+      moveTo(best[0], best[1]);
+    } else moveTo(tx, ty);
+  }
+  function wander() { if (!chasing) return; const { w, h } = size(); let tx, ty, n = 0; do { tx = PAD + Math.random() * (vW() - w - PAD * 2); ty = PAD + Math.random() * (vH() - h - PAD * 2); n++; } while (Math.hypot(tx + w / 2 - pointer.x, ty + h / 2 - pointer.y) < RADIUS + 60 && n < 12); moveTo(tx, ty); }
+  function startChase() {
+    if (chasing || unlocked) return;
+    chasing = true; chaseStart = Date.now();
+    home = loginBtn.getBoundingClientRect(); homeDirty = false;
+    loginBtn.style.width = loginBtn.offsetWidth + 'px';
+    loginBtn.style.position = 'fixed'; loginBtn.style.margin = '0'; loginBtn.style.right = 'auto'; loginBtn.style.bottom = 'auto';
+    loginBtn.style.zIndex = '9999'; loginBtn.style.left = home.left + 'px'; loginBtn.style.top = home.top + 'px';
+    loginBtn.style.boxShadow = '0 0 24px rgba(236,72,153,.55)';
+    document.body.appendChild(loginBtn);
+    pos = { x: home.left, y: home.top };
+    status.classList.add('chasing'); hudStatus.classList.add('warn'); hudStatus.textContent = '[ ПОГОНЯ ЗА КНОПКОЙ ]';
+    statusT = setInterval(() => { const left = Math.max(0, Math.ceil((CHASE - (Date.now() - chaseStart)) / 1000)); status.textContent = '⏱ Кнопка сдастся через ' + left + ' с. Вы пока нет.'; }, 250);
+    unlockT = setTimeout(unlock, CHASE);
+    if (!reduceMotion) wanderT = setInterval(wander, 1100);
+    requestAnimationFrame(() => { loginBtn.style.transition = reduceMotion ? 'left .08s linear, top .08s linear' : 'left .3s cubic-bezier(.22,1,.36,1), top .3s cubic-bezier(.22,1,.36,1), box-shadow .3s'; fleeFrom(pointer.x, pointer.y); });
+  }
+  function unlock() {
+    if (!chasing) return;
+    chasing = false; unlocked = true;
+    clearTimeout(unlockT); clearInterval(wanderT); clearInterval(statusT);
+    if (rafId) cancelAnimationFrame(rafId);
+    document.removeEventListener('pointermove', onMove); document.removeEventListener('pointerdown', onDown);
+    window.removeEventListener('resize', onResize);
+    loginBtn.removeEventListener('click', blockClick, true); loginBtn.removeEventListener('keydown', blockKey, true);
+    loginForm.removeEventListener('submit', blockSubmit);
+    const restore = () => {
+      btnSlot.appendChild(loginBtn); loginBtn.style.cssText = '';
+      loginBtn.style.boxShadow = '0 0 18px rgba(15,174,141,.6)';
+      setTimeout(() => { loginBtn.style.boxShadow = ''; }, 2000);
+      status.classList.remove('chasing'); status.classList.add('done');
+      status.textContent = '✅ Поймана! Входите. Мы слегка впечатлены.';
+      hudStatus.classList.remove('warn'); hudStatus.classList.add('good'); hudStatus.textContent = '[ КНОПКА ПОЙМАНА ]';
+      shutter(); say('Кнопка сдалась. αξιοπρέπεια — нет 😌');
+    };
+    if (homeDirty || reduceMotion || !home) restore();
+    else { loginBtn.style.left = home.left + 'px'; loginBtn.style.top = home.top + 'px'; setTimeout(restore, 330); }
+  }
+  function blockClick(e) {
+    if (unlocked) return;
+    e.preventDefault(); e.stopPropagation();
+    tries++; tryEl.textContent = String(Math.min(tries, 99)).padStart(2, '0');
+    say(taunts[(tries - 1) % taunts.length]);
+    pointer = { x: e.clientX, y: e.clientY };
+    if (!chasing) startChase(); else fleeFrom(e.clientX, e.clientY);
+  }
+  function blockKey(e) { if (unlocked) return; if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!chasing) startChase(); } }
+  function blockSubmit(e) { if (unlocked) return; e.preventDefault(); if (!chasing) startChase(); }
+  function center() {
+    if (chasing) { const { w, h } = size(); return { x: pos.x + w / 2, y: pos.y + h / 2, ok: true }; }
+    const r = loginBtn.getBoundingClientRect(); if (!r.width || !r.height) return { x: 0, y: 0, ok: false };
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2, ok: true };
+  }
+  function onMove(e) {
+    pointer = { x: e.clientX, y: e.clientY };
+    if (unlocked || rafId) return;
+    rafId = requestAnimationFrame(() => { rafId = 0; if (unlocked) return; const c = center(); if (!c.ok) return; const d = Math.hypot(pointer.x - c.x, pointer.y - c.y); if (!chasing) { if (d < RADIUS) startChase(); } else if (d < RADIUS + 50) fleeFrom(pointer.x, pointer.y); });
+  }
+  function onDown(e) { if (unlocked) return; pointer = { x: e.clientX, y: e.clientY }; const c = center(); if (!c.ok) return; if (Math.hypot(pointer.x - c.x, pointer.y - c.y) < RADIUS) { if (!chasing) startChase(); fleeFrom(pointer.x, pointer.y); } }
+  function onResize() { if (chasing) { homeDirty = true; moveTo(pos.x, pos.y); } }
+  document.addEventListener('pointermove', onMove, { passive: true });
+  document.addEventListener('pointerdown', onDown, { passive: true });
+  window.addEventListener('resize', onResize);
+  loginBtn.addEventListener('click', blockClick, true);
+  loginBtn.addEventListener('keydown', blockKey, true);
+  loginForm.addEventListener('submit', blockSubmit);
+});
+</script>
+</body>
+</html>

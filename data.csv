@@ -1,0 +1,5 @@
+kind,owner,payload
+kits,admin,"[{""id"": ""k1"", ""name"": ""Студийный комплект"", ""tag"": ""event"", ""body"": ""650|1900|Sony A7 IV"", ""lens"": ""695|2100|Зум 24-70mm f/2.8"", ""parts"": [""flash"", ""monitor""], ""fav"": true, ""createdAt"": ""2026-10-01T10:00:00""}]"
+profile,admin,"{""displayName"": ""Админ Студии"", ""bio"": ""Слежу за порядком и чужими ригами."", ""avatar"": ""🛠"", ""brand"": ""Sony"", ""joined"": ""2026-01-10"", ""frames"": 4210}"
+kits,reader,"[{""id"": ""k2"", ""name"": ""Мой первый кит"", ""tag"": ""street"", ""body"": ""550|1350|Fujifilm X-S20"", ""lens"": ""180|250|Фикс 35mm f/1.8"", ""parts"": [""led""], ""fav"": false, ""createdAt"": ""2026-11-01T10:00:00""}]"
+profile,reader,"{""displayName"": ""Читатель"", ""bio"": ""Смотрю, не трогаю."", ""avatar"": ""👀"", ""brand"": ""Fujifilm"", ""joined"": ""2026-09-01"", ""frames"": 120}"
